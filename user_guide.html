@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Getting started with LOBSTER</title>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">    
+    <link rel="shortcut icon" href="favicon.ico">  
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <!-- FontAwesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.8.2/js/all.js" integrity="sha384-DJ25uNYET2XCl5ZF++U8eNxPWqcKohUUBUpKGlNLMchM7q4Wjg2CUpjHLaL8yYPH" crossorigin="anonymous"></script>
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">   
+    <!-- Plugins CSS -->    
+    <link rel="stylesheet" href="assets/plugins/prism/prism.css">
+    <link rel="stylesheet" href="assets/plugins/elegant_font/css/style.css">  
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="assets/css/styles.css"> 
+</head> 
+
+<body class="body-pink">
+    <div class="page-wrapper">
+        <!-- ******Header****** -->
+        <header id="header" class="header">
+            <div class="container">
+                <div class="branding">
+                    <h1 class="logo">
+                        <a href="index.html">
+                            <span aria-hidden="true" class="icon_documents_alt icon"></span>
+                            <span class="text-highlight">LOB</span><span class="text-bold">STER</span>
+                        </a>
+                    </h1>    
+                </div>
+            </div>
+        </header>
+		
+        <div class="doc-wrapper">
+            <div class="container">
+                <div id="doc-header" class="doc-header text-center">
+                    <h1 class="doc-title"><i class="icon fa fa-book"></i> Getting Started</h1>
+                    <div class="meta"><i class="far fa-clock"></i> Last updated: November 13th, 2019</div>
+                </div>
+				
+				<!--//doc-header-->
+                <div class="doc-body row">
+                    
+                    <div class="doc-content col-md-9 col-12 order-1">
+
+                    	<p><b>LOBSTER</b> is an image analysis environment designed to identify biological objects in multidimensional microscopy images, and measure their location, co-location, geometry, dynamics and intensity distribution. The images are processed by automatic workflows (no user interaction) and any number of images can be batch processed in a single go. Importantly, the software does not set any limit on image size.</p>
+
+                        <div class="content-inner">
+                            <section id="setup-section" class="doc-section">
+                                <h2 class="section-title">Setting Up</h2>
+                                <div class="section-block">
+                                  <p>Assuming that MATLAB (version >=2015a) and both Image processing and Statistics & Machine Learning toolboxes are installed, setting up the software is extremely simple and summarized below:</p>
+								  <ul>
+                                   <li>Download the software <a href="https://github.com/SebastienTs/LOBSTER" target="_blank"> repository</a> (green button)</li>
+                                   <li>Unzip its content to an empty folder where MATLAB has read/write access</li> 
+                                   <li>Create an empty folder <b>/Images</b> inside installation folder and unzip the content of <a href="https://drive.google.com/file/d/18A0sm-69TTEl-19DAprqiLHmO-0nBkg4/view?usp=sharing" target="_blank">this archive</a> inside</li>
+                                   <li>Create an empty folder <b>/Results</b> inside installation folder, download <a href="https://drive.google.com/file/d/1GiJd-JfBvOHJcm_WOB1_gAvMuRAZzOy3/view?usp=sharing" target="_blank">this archive</a> and unzip its content inside</li>
+                                   </ul>
+                                   Windows is highly recommended but the software should be compatible with all major operating systems. Refer to <a href="https://drive.google.com/file/d/1hn9RIoW2sG8nhYN_fLvrPlskLbM0sao7/view?usp=sharing" target="_blank"><b>LOBSTER</b> documentation</a> (sections <b>Requirements, Installation and Startup</b>) for details.
+                                  </div>
+                            </section><!--//doc-section-->
+                        </div><!--//content-inner-->
+
+                        <div class="content-inner">
+                            <section id="init-section" class="doc-section">
+                                <h2 class="section-title">Initializing</h2>
+                                <div class="section-block">
+                                   <p>To initialize <b>LOBSTER</b>: 
+                                   <ul>	
+                                   <li>Launch MATLAB</li>
+                                   <li>Navigate to installation folder with the command cd(<font color="magenta">'PathToInstallationFolder'</font>)</li>
+                                   <li>Type <b>init</b> in the console</li>
+                                   </ul>
+                                   This is illustrated at the beginning of <a href="https://drive.google.com/file/d/1N9KWKvS52NMGZH0WiYF8bwJLZsvLFx6J/view?usp=sharing" target="_blank">this video</a>.  
+                                  </div>
+                            </section><!--//doc-section-->
+                        </div><!--//content-inner-->
+
+                        <div class="content-inner">
+                            <section id="architecture-section" class="doc-section">
+	                              <h2 class="section-title">Architecture</h2>
+	                              <div class="section-block">
+	                              <p>
+	                              <b>LOBSTER</b> relies on objects masks and simple command calls to MATLAB console as basic building blocks. This might at first feel less user friendly than a graphical user interface but it actually brings a high modularity to the environment. Indeed, calls can be easily sequenced and object masks combined to simply achieved advanced measurements without learning any programming language.
+	                              </p>
+	                              <p>
+	                              Following this philosophy, <b>LOBSTER</b> architecture decouples objects identification, measurements and visualization. These operations are respectively performed by calls to three computational modules described below.
+				    			  </p>
+                                  <div class="screenshot-holder">
+								    <img class="img-architecture" src="assets/images/architecture.png" alt="screenshot" width="640">
+				    			  </div>
+                                  <p>
+                                  <b>JENI: Launching journals to identify objects</b></p>
+                                  <p>
+                                  TIFF images from an input folder are typically processed into object masks by applying a sequence of image analysis functions (workflow) stored in a <a href="#journals-section"> journal </a> and <a href="#jeni-section">processed by JENI</a>. The object masks can be of four kinds (see illustration above):</p>
+                                  <ul>
+                                  	<li>Binary object masks ('<b>Objs</b>'): plain objects encoded as connected groups of foreground pixels</li>
+									<li>Skeleton masks ('<b>Skls</b>'): 1-pixel curves marking filament centrelines, possibly surrounded by segmented objects</li>
+									<li>Seed masks ('<b>Spts</b>'): foreground object pixels marking objects, possibly surrounded by segmented objects</li>
+									<li>Label masks ('<b>Trks</b>'): plain objects encoded as connected groups of pixels with unique nonzero IDs</li>
+								  </ul>
+                                  </p>
+                                  <p><b>IRMA: Measuring object masks</b></p>
+                                  <p>
+                                  Object measurements are <a href="#irma-section">performed by IRMA</a> from the object masks returned by <b>JENI</b>, and exported to .csv reports. Several channels can be processed at once; they can be used to perform intensity measurements (inside objects of an object mask), or more advanced operations such as object sub-counting (e.g. count spots from a seed mask inside an object mask) or object co-localization (overlap between two binary object masks).
+								  </p>
+								  <p><b>JOSE/IRMA: Exporting object models</b></p>
+								  <p>
+                                  Identified objects can be <a href="#exp-section">exported as 2D/3D models</a> so as to be explored/reviewed externally.
+                                  </p>
+                                  Calls to <b>JENI</b>, <b>IRMA</b> and <b>JOSE</b> can be performed either interactively from MATLAB console or be recorded to <a href="#jobs-section">job scripts</a> and re-used on demand.
+                                  </p>
+                                </div>
+                            </section><!--//doc-section-->
+                        </div><!--//content-inner-->
+
+                        <div class="content-inner">
+                            <section id="jeni-section" class="doc-section">
+                                <h2 class="section-title">Identifying Objects (JENI)</h2>
+                                <div class="section-block">
+                                	<p>
+                                	Workflows are configured inside <a href="#journals-section">journals</a>, human readable text files configuring input/output folders, the sequence of <b>LOBSTER</b> functions to apply to each input image and their associated parameters. Journals are processed by <b>JENI</b> from MATLAB console by typing:
+                                  	<ul style="list-style: none;">
+                                  	<li>>> <b>JENI</b>();</li>
+									<li>>> <b>JENI</b>(<font color="magenta">‘Tissue_SegWaterTiles.jl’</font>);</li>
+									<li>>> <b>JENI</b>(<font color="magenta">‘C:/MyFolder/MyJournal.jl’</font>);</li>
+									</ul>
+									The first call opens a file browser to select the journal to launch, the second assumes that the journal file is located in <b>LOBSTER</b> <b>/Journals</b> folder and the third provides a complete path to the journal file.</p> 
+									</p>If the journal is configured to do so, every input image will be displayed together with the results. Simply close the image viewer or press <b>'X'</b> to proceed to the next image.
+									This is illustrated in <a href="https://drive.google.com/file/d/1N9KWKvS52NMGZH0WiYF8bwJLZsvLFx6J/view?usp=sharing" target="_blank">this video</a>. 
+									</p>
+									<p>
+									If you plan some further operations such as measuring the object masks from output folder, Input and Output folder paths can be conveniently stored to MATLAB variables (placeholders) so as to be easily reused in later calls:
+									</p>
+									<p><font color="green">InputFolder</font> <font color="red">OutputFolder</font> = <b>JENI</b>(<font color="magenta">‘MyJournal.jl’</font>);</p>
+                            </div>
+                            </section><!--//doc-section-->
+                        </div><!--//content-inner-->
+
+                        <div class="content-inner">
+                            <section id="irma-section" class="doc-section">
+                                <h2 class="section-title">Measuring Objects (IRMA)</h2>
+                                <div class="section-block">
+                                  <p>Objects encoded in object masks (<b>JENI</b>) are measured by calling <b>IRMA</b>:</p> 
+                                  <p>>> <b>IRMA</b>(<font color="magenta">‘PathToOutputFolder’</font>, <font color="magenta">‘PathToReportFolder’</font>, <b>MaskType</b>, <b>ImgDim</b>, <b>ZRatio</b>);</p>
+                                  <ul>
+                                  <li><font color="magenta">‘PathToOutputFolder’</font>: full path or <font color="red">OutputFolder</font> (if stored during call to <b>JENI</b>)</li>						
+								  <li><font color="magenta">‘PathToReportFolder’</font>: full path, <b>''</b> no report, '<b>.</b>' default <b>LOBSTER</b> <b>/Reports</b> folder (Name of OutputFolder)</li>
+								  <li><b>MaskType</b>: '<b>Objs</b>', '<b>Skls</b>', '<b>Spts</b>' or '<b>Trks</b>', see <a href="#architecture-section">section Architecture </a>for types of object masks</li>
+								  <li><b>ImgDim</b>: 2 (2D images) or 3 (3D images)</li>
+								  <li><b>ZRatio</b>: ratio between Z spacing and pixel size (only relevant for 3D images)</li>
+                                  </ul>
+                                  <p>It is possible to measure object intensity statistics by providing extra arguments:</p>
+                                  <p>>> <b>IRMA</b>(… , <font color="magenta">‘PathToInputFolder’</font>, <font color="magenta">‘ChanFilter’</font>);</p>
+                                  <ul>
+                                  <li><font color="magenta">‘PathToInputFolder’</font>: full path or InputFolder (if stored from <b>JENI</b> call)</li>						
+								  <li><font color="magenta">‘ChanFilter’</font>: text string such as <font color="magenta">'*_C01.tif'</font> where <b>*</b> is a whild card. The intensity statistics inside the object masks are only measured in the images with name matching <font color="magenta">‘ChanFilter’</font>.</li>
+                                  </ul>
+                                  <p>Object intensity measurements is illustrated in <a href="https://drive.google.com/file/d/1toy-_qnBCSnqBVzXAsRnNg6m0WB467Q6/view?usp=sharing" target="_blank">this video</a>.  
+                            	</div>
+                            </section><!--//doc-section-->
+                        </div><!--//content-inner-->
+
+                        <div class="content-inner">
+                            <section id="guide-section" class="doc-section">
+                                <h2 class="section-title">Using LOBSTER for your own Application</h2>
+                                <div class="section-block">
+                                  <p>
+                                  	Designing practical <a href="#journals-section">journals</a> and becoming familiar with <a href="#2djournalsfunctions"><b>LOBSTER</b> functions</a> can take some practice. To get started, the best approach is probably to test and adapt existing journals since many sample journals and companion images are provided (see <a href="https://drive.google.com/file/d/1hn9RIoW2sG8nhYN_fLvrPlskLbM0sao7/view?usp=sharing" target="_blank"><b>LOBSTER</b> documentation</a> Appendix - Applications). 
+                                  	<p>To process your own images, you can start by:</p>
+                                  	<ul>
+									<li> Looking for a journal performing at least part of the analysis you plan; journals are located in <b>LOBSTER</b> /Journals folder.</li>
+									<li> Running the journal to see the input images and get a feeling about the results.</li>
+									<li> For large images, you probably first want to crop out some illustrative regions and export them to an empty folder.</li>
+									<li> Make a copy of the journal and modify it to point to your input image folder.</li>
+									<li> Run the journal.</li>
+									<li> You will probably need to tweak function parameters to obtain satisfying results: open the journal from the console hyperlink and edit function parameters. Save the journal and run it again (from console hyperlink). This is illustrated in <a href="https://drive.google.com/file/d/1N9KWKvS52NMGZH0WiYF8bwJLZsvLFx6J/view?usp=sharing" target="_blank">this video</a>. To get help on a function, right click on its name from MATLAB script editor and select <b>Help on Selection</b>.</li>
+									<li> Completing the project might finally require some customization, such as combining multiple journals and calling <b>IRMA</b> to perform measurements (see <a href="#jobs-section">job scripts</a>) or exporting object models.</li>
+									</ul>
+                                  </p> 
+                            </div>
+                            </section><!--//doc-section-->
+                        </div><!--//content-inner-->
+
+						<div class="content-inner">
+                            <section id="jobs-section" class="doc-section">
+                                <h2 class="section-title">Job Scripts</h2>
+                                <div class="section-block">
+                                <p>Job scripts are MATLAB files used to record the calls to <b>JENI</b>, <b>IRMA</b> and <b>JOSE</b> so as to automate their further execution. For instance the job script below (<b>/Jobs/FISM.m</b>)
+                                sequentially calls two journals: one segmenting nuclei into object masks and another one detecting FISH spots from another channel to output a seed mask. The number of spots per nuclei is then reported by calling <b>IRMA</b> and using the seed mask as intensity channel and the object mask as measurement mask.</p>
+                                <p>
+                                <code>
+                                [InputFolder1 MaskFolder1] = GENI('FISH_nucseg.jl');<br />
+								[InputFolder2 MaskFolder2] = GENI('FISH_sptdet.jl');<br />
+								IRMA(MaskFolder1,'.','Objs',2,1, MaskFolder2);<br />
+								</code>
+								</p>
+								<p>Note here that <b>GENI</b> was used instead of <b>JENI</b> to prevent image display and user interaction. A video demo of this job script into action is provided <a href="https://drive.google.com/file/d/1d2tZiJDSmBWlcp65HaFTgdlqMcDExaSx/view?usp=sharing" target="_blank">here</a>.</p>
+                            </div>
+                            </section><!--//doc-section-->
+                        </div><!--//content-inner-->
+						
+                        <div class="content-inner">
+                            <section id="journals-section" class="doc-section">
+                                <h2 class="section-title">Journals</h2>
+                                <div class="section-block">
+                                  <p>Depending on the input images, journals can be of three types: 2D (<b>.jl</b>), 3D (<b>.jls</b>) or 2D/3D time-lapse (<b>.jlm</b>). 2D journals are very flexible to handle multiple channels and perform image quality check prior to processing, which is often useful in the context of high content screening automated aquisition. 3D journals are designed to process large images, and offer multiple exploration and visualization options. Time-lapse journals are designed to process images from the input folder by pair of consecutive time points (each time point should be stored in a different .tif file).</p>
+                                  <p>In the following section we focus on 2D journals, please refer to <a href="https://drive.google.com/file/d/1hn9RIoW2sG8nhYN_fLvrPlskLbM0sao7/view?usp=sharing" target="_blank"><b>LOBSTER</b> documentation</a>, section <b>Dissecting a 3D journal</b> and section <b>Dissecting a 2D/3D time-lapse journal</b> for information on other journal types.</p>
+                                  <p><b>LOBSTER</b> applies sequences of image processing functions (workflows) to identify objects in input images. <b>LOBSTER</b> functions are all stored in <b>LOBSTER</b> <b>/Code/_Functions</b> folder.
+                                  You do not need to know much about the internals of <b>LOBSTER</b> functions but it is important to understand that they are asociated a set of parameters and that they transform one or several input images into one or several output images. To get some help on a function, open journal in MATLAB editor, right click on the name of the function and select <b>Help on Selection</b>.</p>
+                                  <p>Let’s inspect the journal file <font color="magenta">'Tissue_SegWaterTiles.jl'</font> (from <b>LOBSTER</b> <b>/Journals</b> folder) in MATLAB editor (Open button from MATLAB upper ribbon and select all Files (<b>*.*</b>) as file filter). This journal is demoed in <a href="https://drive.google.com/file/d/1N9KWKvS52NMGZH0WiYF8bwJLZsvLFx6J/view?usp=sharing" target="_blank">this video</a>.</p>
+				    			  <div class="section-block">
+				    			  <code>
+				    			  		InputFolder = './Images/Tissue/';<br />
+										OutputFolder = './Results/Images/Tissue/';<br />
+ 										<br />
+										@iA = '*.tif';<br />
+ 										<br />
+										@fxg_mWaterTiles [iA] > [M];<br />
+										params.GRad = 4;<br />                    
+										params.ExtendedMinThr = 5;<br />
+										/endf<br />
+ 										<br />
+										/show iA > M;<br />
+										/keep M > tif;<br />
+									</code>
+									</div>
+								</p>
+								
+								<section id="2djournalsconfig" class="doc-section">
+                                <h4 class="section-title">Journals: Configuration</h4>
+                                <div class="section-block">
+								<p>
+								The first two lines of a journal are compulsory, they set paths to input and output image folders. Paths can be absolute (e.g. <font color="magenta">'E:/LOBSTER'</font>) or relative to <b>LOBSTER</b> installation folder (starts by <b>./</b>). 
+								</p>
+								<p>
+								Images are sequentially processed from input folder: <b>@iA</b> declares the current input image (now on variable <b>iA</b> in the journal) and associates it to an image filter. In this example, the filter configures <b>JENI</b> to exclusively process TIFF files from the input folder. The character <b>*</b> is a wildcard (replaces any string in file name).
+								</p>
+								</div>
+								</section>
+
+								<section id="2djournalsfunctions" class="doc-section">
+								<h4 class="section-title">Journals: LOBSTER Functions</h4>
+                                <div class="section-block">
+								<p><b>LOBSTER</b> functions are called in the order they appear; they are identified by the special character <b>@f</b>. For instance:</p>
+								<p><b>@fxg_mWaterTiles [iA] > [M]</b></p>
+								<p>calls the function <b>fxg_mWaterTiles</b> transforming input image <b>iA</b> into image <b>M</b>. Function arguments can be either input image variables (here <b>iA</b>) or temporary images (here <b>M</b>). Function parameters are configured in the structure <b>params</b> and the function declaration ends by <b>/endf</b>.</p>
+								</p>
+								<p>Right clicking on the function <b>fxg_mWaterTiles</b> in MATLAB script editor and seleting <b>Help on Selection</b> brings this window:</p>
+								<div class="screenshot-holder">
+								      <img class="img-functiohelp" src="assets/images/functionhelp.png" alt="screenshot" width="800">
+				    			  </div>
+								</div>
+								<p>As can be read from the help, the input images are first Gaussian blured to mitigate noise (the strength of the filter is controled by the parameter <b>GRad</b>), and then objects are segmented into tiles, hopefully a single tile per object. The tile detection tolerance is controled by the parameter <b>ExtendedMinThr</b>.</p>
+								</section>
+
+								<section id="2djournalsviewexp" class="doc-section">
+								<h4 class="section-title">Journals: Image View/Export</h4>
+                                <div class="section-block">
+								<p>To display every input image <b>iA</b> and overlay the resulting object mask <b>M:</b></p>
+								<p><b>/show iA > M</b></p>
+								<p>Exporting object mask <b>M</b> to output folder:</p>
+								<p><b>/keep M > tif</b></p>
+								</div>
+                            	</section>
+
+                            	<section id="2djournalsseq" class="doc-section">
+                            	<h4 class="section-title">Journals: Sequencing Functions</h4>
+                                <div class="section-block">
+								<p>Multiple functions can be sequenced to achieve more complex operations, such as in the sample journal <b>/Journals/</b><font color="magenta">'NucleiCytoo_GradWaterTilesMerge.jl'</font>.</p>
+								<p>See this journal in action in <a href="https://drive.google.com/file/d/1toy-_qnBCSnqBVzXAsRnNg6m0WB467Q6/view?usp=sharing" target="_blank">this video</a>.</p>
+								<code>
+										InputFolder = './Images/NucleiCytoo/';<br />
+										OutputFolder = './Results/Images/NucleiCytoo/';<br />
+										Fill = 1;<br />
+										Lbl = 1;<br />
+										<br />
+										@iA = '*C00*.tif';<br />
+										<br />
+										@fxg_mGradWaterTiles [iA] > [L];<br />
+										params.GaussianRadInt = 2;<br />
+										params.ExtendedMinThr = 1.8;<br />
+										/endf<br />
+										<br />
+										@fxm_lTilesMerge [L, iA] > [L2];<br />
+										params.GaussianRad = 2;<br />
+										params.MinObjArea = 175;<br />
+										params.MinSal = -0.5;<br />
+										params.MaxValleyness = 1.075;<br />
+										params.GaussianRadGeom = 2;<br />
+										params.ConcavityThresh = 0.4;<br />
+										/endf<br />
+										<br />
+										/show iA > L2;<br />
+										/keep L2 > tif;<br />
+									</code>
+								</div>
+								</section>
+								<p>Here, the first function aims at identifying bright regions in the image and the second attempts to merge these regions into concave bright particles.</p>
+								<p>The first function transforms input image <b>iA</b> (input folder) into image <b>L</b>.</p>
+								<p>The second function tranforms image <b>L</b> and input image <b>iA</b> into image <b>L2</b>.</p>
+								<p>The input image filter configures than only TIFF files containing the text string <b>‘C00’</b> are processed; this is required to process a specific channel when several channels are mixed in input folder.</p>
+								<p>Finally, lines 3 and 4 set options to alter the display of the results, see <a href="https://drive.google.com/file/d/1U0YvgWZVeR7e1IyqOBcbvvYzEsseh67K/view?usp=sharing" target="_blank"> LOBSTER cheat sheet</a>.</p>
+
+                            </section><!--//doc-section-->
+                        </div><!--//content-inner-->
+                    
+                        <div class="content-inner">
+                            <section id="exp-section" class="doc-section">
+                                <h2 class="section-title">Exporting Objects (IRMA/JOSE)</h2>
+                                <div class="section-block">
+                                  <p>Object 3D models are exported by passing a list <b>{}</b> as <b>IRMA</b> 5th argument:</p> 
+                                  <ul>
+                                  <li>‘<b>Objs</b>’ {<b>ZRatio</b>, <b>Frc</b>, <font color="magenta">‘PathtoExpFolder’</font>} exports plain objects as <b>STL</b> mesh (see <a href="https://drive.google.com/file/d/1-41vtMYAyNNR9rr4f1CZljHTCj_32EnY/view?usp=sharing" target="_blank">this video</a>)
+                                  <ul>
+                                  <li><b>Frc</b>: fraction of node to keep (1: keep all)</li>
+                                  <li><font color="magenta">‘PathtoExpFolder’</font>: mesh exportation folder</li>
+                                  </ul>
+                                  </li>
+                                  <li>‘<b>Skls</b>’ {<b>ZRatio</b>, <b>Stp</b>, <font color="magenta">‘PathtoExpFolder’</font>, <b>ExportationFormat</b>} exports filament networks as 3D model (see <a href="https://drive.google.com/file/d/1e2OjO0w4Wk5F2lvgcsMlLF11FKnCUY9d/view?usp=sharing" target="_blank">this video</a>)</li>
+                                  <ul>
+                                  <li><b>Stp</b>: network tracing step (pix, typical: 2-4)</li>
+                                  <li><font color="magenta">‘PathtoExpFolder’</font>: model exportation folder</li>
+                                  <li><b>ExportationFormat</b>: '<b>SWC</b>' (default) or '<b>OBJ</b>'</li>
+                                  </ul>
+                                  <li>‘<b>Trks</b>’ {ZRatio,'',‘PathtoExpFolder’} exports object tracks as <b>SWC</b> model</li>
+                                  <ul>
+                                   <li><b>ZRatio</b>: Time strecth for 2D time-lapses</li>
+                                  <li><font color="magenta">‘PathtoExpFolder’</font>: model exportation folder</li>
+                                  </ul>
+                                  </ul>
+                                  <p>Object markers <b>'Spts'</b> can be exported as <b>CellInsight</b> project (.xls file) from MATLAB console:</p>
+                                  <p>>> <b>JOSE</b>(<font color="magenta">'PathToReportFolder'</font>,'<b>Spts</b>', <font color="magenta">'PathToExportFolder'</font>,'<b>CellInsight</b>', <b>''</b>, <b>''</b>);</p>
+                                  <p>It is recommended to export <b>CellInsight</b> project to input image folder since CellInsight attempts to import the project from this location by default.
+                                  See <a href="https://drive.google.com/file/d/1oEUen0XjYvNXZoVFkxTslmZv7VzHRGHe/view?usp=sharing" target="_blank">this video</a> for basic usage of <b>CellInsight</b> ImageJ macro.</p>         
+                            </div>
+                            </section><!--//doc-section-->
+                        </div><!--//content-inner-->
+                    
+                    	<div class="content-inner">
+                            <section id="juli-section" class="doc-section">
+                                <h2 class="section-title">LOBSTER Image Analysis Server (JULI)</h2>
+                                <div class="section-block">
+                    				Job scripts can also be sent to <b>JULI</b>, an image analysis server able to email results (.csv files, object models) upon job completion. For more details refer to <a href="https://drive.google.com/file/d/1hn9RIoW2sG8nhYN_fLvrPlskLbM0sao7/view?usp=sharing" target="_blank"><b>LOBSTER</b> documentation</a> (section <b>JULI</b>) or watch <a href="https://drive.google.com/file/d/1KEDM4sLVsZ2D25pdlr8bZnfK96diM0s1/view?usp=sharing" target="_blank">this video</a>.
+                    				</div>
+                            </section><!--//doc-section-->
+                        </div><!--//content-inner-->
+
+                   	</div><!--//doc-content-->
+
+                    <div class="doc-sidebar col-md-3 col-12 order-0 d-none d-md-flex">
+                        <div id="doc-nav" class="doc-nav">
+	                            <nav id="doc-menu" class="nav doc-menu flex-column sticky">
+	                            	<a class="nav-link scrollto" href="#setup-section">Setting Up</a>
+	                            	<a class="nav-link scrollto" href="#init-section">Initialiazing</a>
+	                            	<a class="nav-link scrollto" href="#architecture-section">Architecture</a>
+	                            	<a class="nav-link scrollto" href="#jeni-section">Identifying Objects (JENI)</a>
+	                                <a class="nav-link scrollto" href="#irma-section">Measuring Objects (IRMA)</a>
+	                                <a class="nav-link scrollto" href="#guide-section">Customizing</a>
+									<a class="nav-link scrollto" href="#jobs-section">Job Scripts</a>
+	                                <a class="nav-link scrollto" href="#journals-section">Journals</a>
+                                    <nav class="doc-sub-menu nav flex-column">
+                                        <a class="nav-link scrollto" href="#2djournalsconfig">Configuration</a>
+                                        <a class="nav-link scrollto" href="#2djournalsfunctions">LOBSTER Functions</a>
+                                        <a class="nav-link scrollto" href="#2djournalsviewexp">View/Export</a>
+                                        <a class="nav-link scrollto" href="#2djournalsseq">Sequencing functions</a>
+									</nav>
+									<a class="nav-link scrollto" href="#exp-section">Exporting objects (IRMA/JOSE)</a>
+									<a class="nav-link scrollto" href="#juli-section">Image Analysis Server (JULI)</a>
+	                            </nav><!--//doc-menu-->
+                        </div>
+
+                    </div><!--//doc-sidebar-->
+                </div><!--//doc-body-->              
+            </div><!--//container-->
+        </div><!--//doc-wrapper-->
+    </div><!--//page-wrapper-->
+    
+    <footer id="footer" class="footer text-center">
+        <div class="container">
+            <!--/* This template is released under the Creative Commons Attribution 3.0 License. Please keep the attribution link below when using for your own project. Thank you for your support. :) If you'd like to use the template without the attribution, you can buy the commercial license via our website: themes.3rdwavemedia.com */-->
+            <small class="copyright">Designed with <i class="fas fa-heart"></i> by <a href="https://themes.3rdwavemedia.com/" target="_blank">Xiaoying Riley</a> for developers</small>  
+        </div><!--//container-->
+    </footer><!--//footer-->
+    
+    <!-- Main Javascript -->          
+    <script type="text/javascript" src="assets/plugins/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/prism/prism.js"></script>    
+    <script type="text/javascript" src="assets/plugins/jquery-scrollTo/jquery.scrollTo.min.js"></script>      
+    <script type="text/javascript" src="assets/plugins/stickyfill/dist/stickyfill.min.js"></script>                                                         
+    <script type="text/javascript" src="assets/js/main.js"></script>
+    
+</body>
+</html>
