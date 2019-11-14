@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Scripting LOBSTER</title>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">    
+    <link rel="shortcut icon" href="favicon.ico">  
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <!-- FontAwesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.8.2/js/all.js" integrity="sha384-DJ25uNYET2XCl5ZF++U8eNxPWqcKohUUBUpKGlNLMchM7q4Wjg2CUpjHLaL8yYPH" crossorigin="anonymous"></script>
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">   
+    <!-- Plugins CSS -->    
+    <link rel="stylesheet" href="assets/plugins/prism/prism.css">
+    <link rel="stylesheet" href="assets/plugins/elegant_font/css/style.css">  
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="assets/css/styles.css"> 
+</head> 
+
+<body class="body-pink">
+    <div class="page-wrapper">
+        <!-- ******Header****** -->
+        <header id="header" class="header">
+            <div class="container">
+                <div class="branding">
+                    <h1 class="logo">
+                        <a href="index.html">
+                            <span aria-hidden="true" class="icon_documents_alt icon"></span>
+                            <span class="text-highlight">LOB</span><span class="text-bold">STER</span>
+                        </a>
+                    </h1>    
+                </div>
+            </div>
+        </header>
+		
+        <div class="doc-wrapper">
+            <div class="container">
+                <div id="doc-header" class="doc-header text-center">
+                    <h1 class="doc-title"><i class="icon fa fa-book"></i> Scripting LOBSTER</h1>
+                    <div class="meta"><i class="far fa-clock"></i> Last updated: November 13th, 2019</div>
+                </div>
+				
+				<!--//doc-header-->
+                <div class="doc-body row">
+                    
+                    <div class="doc-content col-md-9 col-12 order-1">
+
+                    	<p>Scripting...</p>
+
+                        <div class="content-inner">
+                            <section id="jeni-section" class="doc-section">
+                                <h2 class="section-title">Identifying Objects (JENI)</h2>
+                                <div class="section-block">
+                                	<p>
+                                	Workflows are configured inside <a href="#journals-section">journals</a>, human readable text files configuring input/output folders, the sequence of <b>LOBSTER</b> functions to apply to each input image and their associated parameters. Journals are processed by <b>JENI</b> from MATLAB console by typing:
+                                  	<ul style="list-style: none;">
+                                  	<li>>> <b>JENI</b>();</li>
+									<li>>> <b>JENI</b>(<font color="magenta">‘Tissue_SegWaterTiles.jl’</font>);</li>
+									<li>>> <b>JENI</b>(<font color="magenta">‘C:/MyFolder/MyJournal.jl’</font>);</li>
+									</ul>
+									The first call opens a file browser to select the journal to launch, the second assumes that the journal file is located in <b>LOBSTER</b> <b>/Journals</b> folder and the third provides a complete path to the journal file.</p> 
+									</p>If the journal is configured to do so, every input image will be displayed together with the results. Simply close the image viewer or press <b>'X'</b> to proceed to the next image.
+									This is illustrated in <a href="https://drive.google.com/file/d/1N9KWKvS52NMGZH0WiYF8bwJLZsvLFx6J/view?usp=sharing" target="_blank">this video</a>. 
+									</p>
+									<p>
+									If you plan some further operations such as measuring the object masks from output folder, Input and Output folder paths can be conveniently stored to MATLAB variables (placeholders) so as to be easily reused in later calls:
+									</p>
+									<p><font color="green">InputFolder</font> <font color="red">OutputFolder</font> = <b>JENI</b>(<font color="magenta">‘MyJournal.jl’</font>);</p>
+                            </div>
+                            </section><!--//doc-section-->
+                        </div><!--//content-inner-->
+                    
+                        <div class="content-inner">
+                            <section id="irma-section" class="doc-section">
+                                <h2 class="section-title">Measuring Objects (IRMA)</h2>
+                                <div class="section-block">
+                                  <p>Objects encoded in object masks (<b>JENI</b>) are measured by calling <b>IRMA</b>:</p> 
+                                  <p>>> <b>IRMA</b>(<font color="magenta">‘PathToOutputFolder’</font>, <font color="magenta">‘PathToReportFolder’</font>, <b>MaskType</b>, <b>ImgDim</b>, <b>ZRatio</b>);</p>
+                                  <ul>
+                                  <li><font color="magenta">‘PathToOutputFolder’</font>: full path or <font color="red">OutputFolder</font> (if stored during call to <b>JENI</b>)</li>						
+								  <li><font color="magenta">‘PathToReportFolder’</font>: full path, <b>''</b> no report, '<b>.</b>' default <b>LOBSTER</b> <b>/Reports</b> folder (Name of OutputFolder)</li>
+								  <li><b>MaskType</b>: '<b>Objs</b>', '<b>Skls</b>', '<b>Spts</b>' or '<b>Trks</b>', see <a href="#architecture-section">section Architecture </a>for types of object masks</li>
+								  <li><b>ImgDim</b>: 2 (2D images) or 3 (3D images)</li>
+								  <li><b>ZRatio</b>: ratio between Z spacing and pixel size (only relevant for 3D images)</li>
+                                  </ul>
+                                  <p>It is possible to measure object intensity statistics by providing extra arguments:</p>
+                                  <p>>> <b>IRMA</b>(… , <font color="magenta">‘PathToInputFolder’</font>, <font color="magenta">‘ChanFilter’</font>);</p>
+                                  <ul>
+                                  <li><font color="magenta">‘PathToInputFolder’</font>: full path or InputFolder (if stored from <b>JENI</b> call)</li>						
+								  <li><font color="magenta">‘ChanFilter’</font>: text string such as <font color="magenta">'*_C01.tif'</font> where <b>*</b> is a whild card. The intensity statistics inside the object masks are only measured in the images with name matching <font color="magenta">‘ChanFilter’</font>.</li>
+                                  </ul>
+                                  <p>Object intensity measurements is illustrated in <a href="https://drive.google.com/file/d/1toy-_qnBCSnqBVzXAsRnNg6m0WB467Q6/view?usp=sharing" target="_blank">this video</a>.  
+                            	</div>
+                            </section><!--//doc-section-->
+                        </div><!--//content-inner-->
+
+                        <div class="content-inner">
+                            <section id="exp-section" class="doc-section">
+                                <h2 class="section-title">Exporting Objects (IRMA/JOSE)</h2>
+                                <div class="section-block">
+                                  <p>Object 3D models are exported by passing a list <b>{}</b> as <b>IRMA</b> 5th argument:</p> 
+                                  <ul>
+                                  <li>‘<b>Objs</b>’ {<b>ZRatio</b>, <b>Frc</b>, <font color="magenta">‘PathtoExpFolder’</font>} exports plain objects as <b>STL</b> mesh (see <a href="https://drive.google.com/file/d/1-41vtMYAyNNR9rr4f1CZljHTCj_32EnY/view?usp=sharing" target="_blank">this video</a>)
+                                  <ul>
+                                  <li><b>Frc</b>: fraction of node to keep (1: keep all)</li>
+                                  <li><font color="magenta">‘PathtoExpFolder’</font>: mesh exportation folder</li>
+                                  </ul>
+                                  </li>
+                                  <li>‘<b>Skls</b>’ {<b>ZRatio</b>, <b>Stp</b>, <font color="magenta">‘PathtoExpFolder’</font>, <b>ExportationFormat</b>} exports filament networks as 3D model (see <a href="https://drive.google.com/file/d/1e2OjO0w4Wk5F2lvgcsMlLF11FKnCUY9d/view?usp=sharing" target="_blank">this video</a>)</li>
+                                  <ul>
+                                  <li><b>Stp</b>: network tracing step (pix, typical: 2-4)</li>
+                                  <li><font color="magenta">‘PathtoExpFolder’</font>: model exportation folder</li>
+                                  <li><b>ExportationFormat</b>: '<b>SWC</b>' (default) or '<b>OBJ</b>'</li>
+                                  </ul>
+                                  <li>‘<b>Trks</b>’ {ZRatio,'',‘PathtoExpFolder’} exports object tracks as <b>SWC</b> model</li>
+                                  <ul>
+                                   <li><b>ZRatio</b>: Time strecth for 2D time-lapses</li>
+                                  <li><font color="magenta">‘PathtoExpFolder’</font>: model exportation folder</li>
+                                  </ul>
+                                  </ul>
+                                  <p>Object markers <b>'Spts'</b> can be exported as <b>CellInsight</b> project (.xls file) from MATLAB console:</p>
+                                  <p>>> <b>JOSE</b>(<font color="magenta">'PathToReportFolder'</font>,'<b>Spts</b>', <font color="magenta">'PathToExportFolder'</font>,'<b>CellInsight</b>', <b>''</b>, <b>''</b>);</p>
+                                  <p>It is recommended to export <b>CellInsight</b> project to input image folder since CellInsight attempts to import the project from this location by default.
+                                  See <a href="https://drive.google.com/file/d/1oEUen0XjYvNXZoVFkxTslmZv7VzHRGHe/view?usp=sharing" target="_blank">this video</a> for basic usage of <b>CellInsight</b> ImageJ macro.</p>         
+                            </div>
+                            </section><!--//doc-section-->
+                        </div><!--//content-inner-->
+                    
+                        <div class="content-inner">
+                            <section id="jobs-section" class="doc-section">
+                                <h2 class="section-title">Job Scripts</h2>
+                                <div class="section-block">
+                                <p>Job scripts are MATLAB files used to record the calls to <b>JENI</b>, <b>IRMA</b> and <b>JOSE</b> so as to automate their further execution. For instance the job script below (<b>/Jobs/FISM.m</b>)
+                                sequentially calls two journals: one segmenting nuclei into object masks and another one detecting FISH spots from another channel to output a seed mask. The number of spots per nuclei is then reported by calling <b>IRMA</b> and using the seed mask as intensity channel and the object mask as measurement mask.</p>
+                                <p>
+                                <code>
+                                [InputFolder1 MaskFolder1] = GENI('FISH_nucseg.jl');<br />
+								[InputFolder2 MaskFolder2] = GENI('FISH_sptdet.jl');<br />
+								IRMA(MaskFolder1,'.','Objs',2,1, MaskFolder2);<br />
+								</code>
+								</p>
+								<p>Note here that <b>GENI</b> was used instead of <b>JENI</b> to prevent image display and user interaction. A video demo of this job script into action is provided <a href="https://drive.google.com/file/d/1d2tZiJDSmBWlcp65HaFTgdlqMcDExaSx/view?usp=sharing" target="_blank">here</a>.</p>
+                            </div>
+                            </section><!--//doc-section-->
+                        </div><!--//content-inner-->
+
+                    	<div class="content-inner">
+                            <section id="juli-section" class="doc-section">
+                                <h2 class="section-title">LOBSTER Image Analysis Server (JULI)</h2>
+                                <div class="section-block">
+                    				Job scripts can also be sent to <b>JULI</b>, an image analysis server able to email results (.csv files, object models) upon job completion. For more details refer to <a href="https://drive.google.com/file/d/1hn9RIoW2sG8nhYN_fLvrPlskLbM0sao7/view?usp=sharing" target="_blank"><b>LOBSTER</b> documentation</a> (section <b>JULI</b>) or watch <a href="https://drive.google.com/file/d/1KEDM4sLVsZ2D25pdlr8bZnfK96diM0s1/view?usp=sharing" target="_blank">this video</a>.
+                    				</div>
+                            </section><!--//doc-section-->
+                        </div><!--//content-inner-->
+
+                   	</div><!--//doc-content-->
+
+                    <div class="doc-sidebar col-md-3 col-12 order-0 d-none d-md-flex">
+                        <div id="doc-nav" class="doc-nav">
+	                            	<a class="nav-link scrollto" href="#jeni-section">Identifying Objects (JENI)</a>
+									<a class="nav-link scrollto" href="#irma-section">Measuring Objects (IRMA)</a>
+									<a class="nav-link scrollto" href="#exp-section">Exporting Objects (IRMA/JOSE)</a>
+									<a class="nav-link scrollto" href="#jobs-section">Job Scripts</a>
+									<a class="nav-link scrollto" href="#juli-section">Image Analysis Server (JULI)</a>
+	                            </nav><!--//doc-menu-->
+                        </div>
+
+                    </div><!--//doc-sidebar-->
+                </div><!--//doc-body-->              
+            </div><!--//container-->
+        </div><!--//doc-wrapper-->
+    </div><!--//page-wrapper-->
+    
+    <footer id="footer" class="footer text-center">
+        <div class="container">
+            <!--/* This template is released under the Creative Commons Attribution 3.0 License. Please keep the attribution link below when using for your own project. Thank you for your support. :) If you'd like to use the template without the attribution, you can buy the commercial license via our website: themes.3rdwavemedia.com */-->
+            <small class="copyright">Designed with <i class="fas fa-heart"></i> by <a href="https://themes.3rdwavemedia.com/" target="_blank">Xiaoying Riley</a> for developers</small>  
+        </div><!--//container-->
+    </footer><!--//footer-->
+    
+    <!-- Main Javascript -->          
+    <script type="text/javascript" src="assets/plugins/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/prism/prism.js"></script>    
+    <script type="text/javascript" src="assets/plugins/jquery-scrollTo/jquery.scrollTo.min.js"></script>      
+    <script type="text/javascript" src="assets/plugins/stickyfill/dist/stickyfill.min.js"></script>                                                         
+    <script type="text/javascript" src="assets/js/main.js"></script>
+    
+</body>
+</html>
