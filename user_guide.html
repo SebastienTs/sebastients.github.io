@@ -90,7 +90,7 @@
 	                              <b>LOBSTER</b> relies on simple objects masks as basic building blocks and it decouples objects identification, measurements and visualization. These operations are respectively performed by three computational modules called either interactively from MATLAB console or triggered from <b>LOBSTER</b> Panel (User Interface). In this tutorial we will use the last option; the other option enables building more complex applications, refer to <a href="scripting.html" target="_blank">this page</a> for details.
 				    			  </p>
                                   <div class="screenshot-holder">
-								    <img class="img-architecture" src="assets/images/architecture.png" alt="screenshot" width="640">
+								    <img class="img-architecture" src="assets/images/architecture.png" alt="screenshot" width="480">
 				    			  </div>
                                   <p>
                                   <b>JENI: Identifying objects</b></p>
@@ -137,37 +137,41 @@
                             <section id="gui-section" class="doc-section">
                                 <h2 class="section-title">LOBSTER Panel</h2>
                                 <div class="section-block">
-                                	<p>To start LOBSTER Panel, type >> <b>LOBSTER</b> in the console.</p>
-									<div class="screenshot-holder">
-								    	<img class="img-gui" src="assets/images/gui.png" alt="screenshot" width="480">
-				    			  	</div>
-                                  <p>
-                                  The panel enables to load up to 2 journals, trigger any kind of object measurements and exportat the object models. It is basically divided in three sections:</p>
-                                  <p>For now, the important parameters of the upper section (from left to write) are:</p>
+                                	<p>To start LOBSTER Panel, type >> <b>LOBSTER</b> in the console. The panel enables to load up to 2 journals, trigger any kind of object measurements and export 3D object models. A context help is provided when moving on an item from the panel. The important parameters from the upper section (from left to right) are:</p>
                                   <ul>
-                                  <li>The dimensionality of the images (2D/3D)</li>
-                                  <li>Whether object models should be exported (3D images only)</li>
-                                  <li>The images <b>ZRatio</b> (ratio between slice spacing and pixel size, default to 1)</li>
-                                  <li>If Journal 2 is a time-lapse journal (default to '<b>-</b>', no time-lapse)</li>
+                                  <li>Input images dimensionality (2D/3D)</li>
+                                  <li>Whether object models should be exported or not (3D images only)</li>
+                                  <li>Input images <b>ZRatio</b> (ratio between slice spacing and pixel size, default to 1)</li>
+                                  <li>If Journal 2 is a time-lapse journal or not (default to '<b>-</b>', no time-lapse)</li>
                                   </ul>
+                                  
+								  <p>The buttons on the right side are used to save/load a project and to exit the panel. To load a journal, press the button <b>Journal1</b> and browse to its name. For instance, let's open the 2D journal <font color="magenta">'Tissue_SegWaterTiles.jl'</font>. Loading a journal reads its input and output folders from the file, but these fields can be edited if required.</p>
 
-                                  <p>The buttons on the right are used to save/load a project and to exit the panel. To load a journal, press the button <b>Journal1</b> and browse to its name. For instance, let's open the 2D journal <font color="magenta">'Tissue_SegWaterTiles.jl'</font> as before. Loading a journal reads its input and output folders from the file but these fields can optionally be edited.</p>
+								  <div class="screenshot-holder">
+								    	<img class="img-gui" src="assets/images/gui.png" alt="screenshot" width="480">
+				    			  </div>
 
-                                  <p>To launch a journal press on the associated <b>Run</b> button. To  visually check the output of the journal, toggle the button <b>Batch</b> on the lower part to <b>Adjust</b>. If the parameters are not well adjusted, you can interrupt the journal by presing <b>'Q'</b>, edit the journal by clicking the associated <b>Edit</b> button, saving it (floppy disk or <b>Ctrl+S</b>) and launching it again. Once the parameters are well adjusted, toggle back to batch mode and launch the journal on all images from the input folder.</p>
+                                  <p>To launch a journal press on the associated <b>Run</b> button. To  visually check the output of the journal, toggle the button <b>Batch</b> on the lower part to <b>Adjust</b>. If the parameters are not well adjusted, you can interrupt the journal by presing <b>'Q'</b>, edit the journal by clicking the associated <b>Edit</b> button, saving it (floppy disk or <b>Ctrl+S</b>) and launching it again. Once the parameters are well adjusted, toggle back to batch mode and launch the journal to process all images from the input folder. It is possible to open a journal input and output folders by pressing <b>Show In</b> and <b>Show Out</b>.
 
-                                  <p>Next, to perform measurements on the identified objects, set mask folder to <b>O1</b>, that is the output journal 1 (this is the default value for Measure 1), and set the measurement to '<b>Objs</b>' (lower drop down menu). Now <b>Run</b> Measure 1, a folder with two <b>.csv</b> files with object measurements for the two input image should pop up. You can browse the first reports by clicking on <b>Show some Reports</b>. You can also inspect the measurement summary from MATLAB console.</p>
-
-                                  <p>It is possible to open input and output folders from a journal by pressing <b>Show In/Out</b>. Several examples of how to export 3D models and combine two journals to achieve advanced measurements are provided in the <b>/Projects</b> folder. Follow an example, also refer to <a href="https://" target="_blank">this video</a> to see how to open exported objects in ImageJ or external software.</p>
+                                  <p>Next, to perform measurements on the identified objects, set mask folder to <b>O1</b>, that is journal 1 output (default), and set the measurement to '<b>Objs</b>' (lower drop down menu) since we are here aiming to measure plain objects (cells). Now <b>Run Measure 1</b>, a folder with two <b>.csv</b> files (two input images) should pop up. You can browse the first reports by clicking <b>Show some Reports</b> and also inspect measurements summary from MATLAB console.</p>
 
                                   <div class="screenshot-holder">
 								    	<img class="img-gui2" src="assets/images/gui2.png" alt="screenshot" width="480">
 				    			  </div>
 
-				    			  <p>In this project, two journals are loaded: one to identify nuclei in a specific channel and another one to identify FISH spots in another channel. <b>Measure 1</b> is linked to <b>O1</b> to measure the nuclei and its intensity channel is used to measure <b>O2</b>, that is the FISH spot mask. Since the measurements report the number of non null intensity pixel per object, we get a per nucleus spot count!</p>
+				    			  <p>Now load the project <font color="magenta">'FISH.mat'</font>. In this project, two journals are loaded: one identifies nuclei and another one identifies FISH markers in another channel. <b>Measure 1</b> is linked to <b>O1</b> to measure nuclei and <b>O2</b> is measured as intensity channel. <b>O2</b> is the output of <b>Journal 2</b>, that is the seed mask localizing the FISH markers. Since object intensity measurements also report the number of non null pixel per object, the number of FISH marker per nucleus can be obtained! Importantly, all the journals and measurements can be triggered automatically by pressing <b>Run All</b>.</p>
 
-				    			  <p>The intensity channel can also be used as a regular intensity channel (redirected to <b>I1</b>) to measure the intensity statistics in a given channel of the input images. If the images from this channel for instance hold the string <font color="magenta">'_C01'</font>, the channel filter should be set to <font color="magenta">'*_C01*.tif'</font> instead of the default <font color="magenta">'*.tif'</font>. This is illustrated in the project <font color="magenta">'NucleiIntensityMeas.mat'</font>.
+				    			  <p>Regular intensity measurements (from <b>I1</b>) can also be performed. If the images from the channel to measure hold for instance the string <font color="magenta">'_C01'</font>, the channel filter should be set to <font color="magenta">'*_C01*.tif'</font> instead of the default <font color="magenta">'*.tif'</font>. This is illustrated in the project <font color="magenta">'NucleiIntensityMeas.mat'</font>.</p>
 
-				    			  <p>Importantly, all the journals and measurements can be triggered automatically by pressing <b>Run All</b>.</p>
+				    			  <p>Several examples of how to export 3D models and combine two journals to achieve advanced measurements are provided in the <b>/Projects</b> folder. Here is a list of tasks you can perform to get familiar with LOBSTER:
+				    			  <ul>
+                                  <li>Open project <font color="magenta">'BloodVesselsTracing.mat'</font>, click <b>Run All</b> and visualize the output models (SWC filament networks) by loading them from <a href="https://janeliascicomp.github.io/SharkViewer/" target="_blank">this webpage</a>.</li>
+                                  <li>Open project <font color="magenta">'CellPilar3DMesh.mat'</font>, click <b>Run All</b> and visualize the output models (STL mesh) by drag and droping them on <a href="https://www.viewstl.com/" target="_blank">this webpage</a>.</li>
+								  <li>Open project <font color="magenta">'LymphGlandCellInsight.mat'</font>, click <b>Run All</b>. Open ImageJ and drag and drop the macro CellInsight (from <b>Tools/CellInsight/CellInsight.ijm</b>). You also need to copy the file <b>GetString.ijm</b> from the same folder to ImageJ <b>macros</b> folder on first usage). Drag and drop the input image (the journal input folder is opened since the <b>.xls</b> CellInsight file is exported inside. Launch the macro and press <b>Import</b>. The object markers can be explored and edited (CellInsight). The input image can be opened in virtual stack mode to handle images of unlimited size.</li>
+								  <li>From the results of the previous project: open the input image in ImageJ, drag and drop the report file (<b>.csv</b>) to ImageJ and drag and drop + run the macro <b>Montager.ijm</b> from <b>Tools/</b>. You will see an interactive montage of all detected objects, clicking an object jump to its position in the original image. The input image can be opened in virtual stack mode to handle images of unlimited size.</li>
+								  <li>Open project <font color="magenta">'HeLaTracking.mat'</font>. This project performs tracking of dividing cells from a sequence of 2D images (<b>TL</b> is enabled). As can be noticed, <b>I2</b> points to <b>O1</b> since the 2D are first segmented into object masks by the first journal before being tracked by the second journal. Measuring the output of the second journal brings three report files: area, XPosition and YPosition (centroid) of the objects. The results can be visualized by running the ImageJ macro <b>Tools/OverlayTrackedObjects.ijm</b> and selecting the input from the first journal as input folder and the output of the second journal as output folder.</li>
+                                  </ul>
+				    			  </p>
 
                             </div>
                             </section><!--//doc-section-->
