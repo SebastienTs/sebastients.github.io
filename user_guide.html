@@ -90,7 +90,7 @@
 	                              <b>LOBSTER</b> relies on simple objects masks as basic building blocks and it decouples objects identification, measurements and visualization. These operations are respectively performed by three computational modules called either interactively from MATLAB console or triggered from <b>LOBSTER</b> Panel (User Interface). In this tutorial we will use the last option; the other option enables building more complex applications, refer to <a href="scripting.html" target="_blank">this page</a> for details.
 				    			  </p>
                                   <div class="screenshot-holder">
-								    <img class="img-architecture" src="assets/images/architecture.png" alt="screenshot" width="480">
+								    <img class="img-architecture" src="assets/images/architecture.png" alt="screenshot" width="400">
 				    			  </div>
                                   <p>
                                   <b>JENI: Identifying objects</b></p>
@@ -148,7 +148,7 @@
 								  <p>The buttons on the right side are used to save/load a project and to exit the panel. To load a journal, press the button <b>Journal1</b> and browse to its name. For instance, let's open the 2D journal <font color="magenta">'Tissue_SegWaterTiles.jl'</font>. Loading a journal reads its input and output folders from the file, but these fields can be edited if required.</p>
 
 								  <div class="screenshot-holder">
-								    	<img class="img-gui" src="assets/images/gui.png" alt="screenshot" width="480">
+								    	<img class="img-gui" src="assets/images/GUI.png" alt="screenshot" width="400">
 				    			  </div>
 
                                   <p>To launch a journal press on the associated <b>Run</b> button. To  visually check the output of the journal, toggle the button <b>Batch</b> on the lower part to <b>Adjust</b>. If the parameters are not well adjusted, you can interrupt the journal by presing <b>'Q'</b>, edit the journal by clicking the associated <b>Edit</b> button, saving it (floppy disk or <b>Ctrl+S</b>) and launching it again. Once the parameters are well adjusted, toggle back to batch mode and launch the journal to process all images from the input folder. It is possible to open a journal input and output folders by pressing <b>Show In</b> and <b>Show Out</b>.
@@ -156,7 +156,7 @@
                                   <p>Next, to perform measurements on the identified objects, set mask folder to <b>O1</b>, that is journal 1 output (default), and set the measurement to '<b>Objs</b>' (lower drop down menu) since we are here aiming to measure plain objects (cells). Now <b>Run Measure 1</b>, a folder with two <b>.csv</b> files (two input images) should pop up. You can browse the first reports by clicking <b>Show some Reports</b> and also inspect measurements summary from MATLAB console.</p>
 
                                   <div class="screenshot-holder">
-								    	<img class="img-gui2" src="assets/images/gui2.png" alt="screenshot" width="480">
+								    	<img class="img-gui2" src="assets/images/GUI2.png" alt="screenshot" width="400">
 				    			  </div>
 
 				    			  <p>Now load the project <font color="magenta">'FISH.mat'</font>. In this project, two journals are loaded: one identifies nuclei and another one identifies FISH markers in another channel. <b>Measure 1</b> is linked to <b>O1</b> to measure nuclei and <b>O2</b> is measured as intensity channel. <b>O2</b> is the output of <b>Journal 2</b>, that is the seed mask localizing the FISH markers. Since object intensity measurements also report the number of non null pixel per object, the number of FISH marker per nucleus can be obtained! Importantly, all the journals and measurements can be triggered automatically by pressing <b>Run All</b>.</p>
