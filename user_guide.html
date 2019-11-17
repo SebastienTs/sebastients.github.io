@@ -50,7 +50,7 @@
                     <div class="doc-content col-md-9 col-12 order-1">
 
 						<section id="intro-section" class="doc-section">
-                    	<p><b>LOBSTER</b> is an image analysis environment to identify biological objects in multidimensional microscopy images and measure their spatial location, geometry, dynamics, intensity distribution and spatial co-location. The images are processed by automatic workflows (no interaction), no size limit is set and any number of images can be batch processed in one go.</p>
+                    	<p><b>LOBSTER</b> is an image analysis environment to identify biological objects in multidimensional microscopy images and measure their spatial location, geometry, dynamics and intensity distribution. 3D objects can be exported as models importable in external software (visualization, edition, simulation...). All images are processed by automatic workflows (no interaction), no limit is set on their size, and any number of images can be batch processed in one go.</p>
 						</section>
 
                         <div class="content-inner">
@@ -104,13 +104,22 @@
 									<li>Label masks ('<b>Trks</b>'): plain objects encoded as connected groups of pixels with unique nonzero <b>IDs.</b></li>
 								  </ul>
                                   </p>
+								  
                                   <p><b>IRMA: Measuring object masks</b></p>
                                   <p>
-                                  Object measurements are performed by <b>IRMA</b> from the object masks returned by <b>JENI</b>, and they are exported to <b>.csv</b> reports. Several channels can be processed at once; they can either be used to perform intensity measurements inside the objects (masks), or more advanced operations such as object sub-counting (count number of markers from a seed mask inside objects of a binary mask) or estimate object spatial co-localization (between two binary masks).
+								  
+								  <div class="screenshot-holder">
+								    <img class="img-objmask" src="assets/images/ObjectMask.png" alt="screenshot" width="480">
+				    			  </div>
+								  
+								  <p>
+								  Journals and object masks are the basic building blocks to more complex workflows. In the figure above, <b>Object Mask 1 </b> can be used to 1) measure the location and geometry of objects identified in <b>C00</b>, 2) measure their intensity statistics in <b>C01</b>, or 3) measure their intensity statistics in <b>Object Mask 2</b>. This last option is for instance useful to perform object sub-counting (e.g. how many spots per object), object based co-localization study (fractional overlap between objects) or extract relative object distance distributions (e.g. spots to filaments). In all cases, object measurements are performed by <b>IRMA</b> from the object masks returned by <b>JENI</b>, and they are exported to <b>.csv</b> reports. Several intensity channels can be processed at once.
+								  </p>
+                                  
 								  </p>
 								  <p><b>JOSE/IRMA: Exporting object models</b></p>
 								  <p>
-                                  Identified objects can be exported as 2D/3D models so as to be edited/explored externally. 
+                                  Identified objects can be exported as 3D models so as to be edited/explored externally. 
                                 </div>
                             </section><!--//doc-section-->
                         </div><!--//content-inner-->
@@ -120,7 +129,7 @@
                                 <h2 class="section-title">Identifying Objects</h2>
                                 <div class="section-block">
                                 	<p>
-                                	Workflows are configured inside <a href="#journals-section">journals</a>, human readable text files configuring input/output folders, the sequence of <b>LOBSTER</b> functions to apply to each input image and their associated parameters. Journals are processed by typing <b>JENI</b> in the console and selecting a journal from the file browser: </p>
+                                	Object identification workflows are configured inside <a href="#journals-section">journals</a>, human readable text files configuring input/output folders, the sequence of <b>LOBSTER</b> functions to apply to each input image and their associated parameters. Journals are processed by typing <b>JENI</b> in the console and selecting a journal from the file browser: </p>
                                   	<ul style="list-style: none;">
                                   	<li>>> <b>JENI</b>;</li>
 									</ul>
