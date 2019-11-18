@@ -89,7 +89,7 @@
 	                              <h2 class="section-title">Architecture</h2>
 	                              <div class="section-block">
 	                              <p>
-	                              <b>LOBSTER</b> relies on objects masks as building blocks and it decouples objects identification, measurements and visualization. These operations are respectively performed by three computational modules called either interactively from MATLAB console or triggered from <b>LOBSTER</b> Panel. In this tutorial we will cover the second option, refer to <a href="scripting.html" target="_blank">this page</a> for details on scripting.
+	                              <b>LOBSTER</b> relies on objects masks as building blocks and it decouples objects identification, measurements and visualization. These operations are respectively performed by three computational modules called either from MATLAB console (scripting) or triggered from <b>LOBSTER</b> Panel (Graphical User Interface). In this tutorial we will cover the second option, refer to <a href="scripting.html" target="_blank">this page</a> for details on scripting.
 				    			  </p>
                                   <div class="screenshot-holder">
 								    <img class="img-architecture" src="assets/images/architecture.png" alt="screenshot" width="640">
@@ -99,9 +99,9 @@
                                   <p>TIFF images from an input folder are typically processed into object masks by applying a sequence of image analysis functions (workflow) configured in a journal (short text file) and processed by <b>JENI</b>. The object masks can be of 4 kinds:</p>
                                   <ul>
                                   	<li>Binary masks ('<b>Objs</b>'): plain objects encoded as connected groups of foreground pixels</li>
-									<li>Skeleton masks ('<b>Skls</b>'): 1-pixel curves marking filament centrelines, possibly surrounded by segmented objects</li>
-									<li>Seed masks ('<b>Spts</b>'): each foreground object pixels mark an object</li>
-									<li>Label masks ('<b>Trks</b>'): plain objects encoded as connected groups of pixels with unique nonzero <b>IDs.</b></li>
+									<li>Skeleton masks ('<b>Skls</b>'): 1-pixel curves marking filament centrelines</li>
+									<li>Seed masks ('<b>Spts</b>'): each foreground pixel mark an object</li>
+									<li>Label masks ('<b>Trks</b>'): plain objects encoded as connected groups of pixels (unique <b>IDs</b>).</li>
 								  </ul>
                                   </p>
 								  
@@ -113,13 +113,13 @@
 				    			  </div>
 								  
 								  <p>
-								  Journals and object masks are the basic building blocks to more complex workflows. In the figure above, <b>Object Mask 1 </b> can be used to 1) measure the location and geometry of objects identified in <b>C00</b>, 2) measure their intensity statistics in <b>C01</b>, or 3) measure their intensity statistics in <b>Object Mask 2</b>. This last option is for instance useful to perform object sub-counting (e.g. how many spots per object), object based co-localization study (fractional overlap between objects) or extract relative object distance distributions (e.g. spots to filaments). In all cases, object measurements are performed by <b>IRMA</b> from the object masks returned by <b>JENI</b>, and they are exported to <b>.csv</b> reports. Several intensity channels can be processed at once.
+								  Journals and object masks are the basic building blocks to more complex workflows. For instance, in the figure above <b>Object Mask 1 </b> is used to <b>1)</b> measure <b>C01</b> intensity inside objects identified in <b>C00</b> and <b>2)</b> Count the number of seeds (non null pixels) in <b>Object Mask 2</b> inside objects identified in <b>C00</b>. Using objects masks as intensity channel can also be used for object based co-localization study,  or to extract relative object distance distributions (e.g. spots to filaments). Object measurements are performed by <b>IRMA</b> from the object masks returned by <b>JENI</b>, and they are exported to <b>.csv</b> reports. Several intensity channels can be processed at once.
 								  </p>
                                   
 								  </p>
 								  <p><b>JOSE/IRMA: Exporting object models</b></p>
 								  <p>
-                                  Identified objects can be exported as 3D models so as to be edited/explored externally. 
+                                  Identified objects can be exported as 3D models so as to be edited/explored externally. Seed masks can be exported as <b>CellInsight</b> files (<b>.xls</b>), an ImageJ macro that can be found in <b>/Tools</b> folder: seeds can be edited and manually classified from this software. Filaments networks can be exported as <a href="http://www.neuronland.org/NLMorphologyConverter/MorphologyFormats/SWC/Spec.html" target="_blank">SWC models</a> or <a href="https://en.wikipedia.org/wiki/Wavefront_.obj_file" target="_blank">Wavefront OBJ models</a>. Plain objects can be exported as <a href="meshhttps://en.wikipedia.org/wiki/STL_(file_format)" target="_blank">STL meshes</a>. 2D object tracks can be exported as <b>SWC</b> trees (the Z dimension encodes time).
                                 </div>
                             </section><!--//doc-section-->
                         </div><!--//content-inner-->
@@ -152,7 +152,7 @@
                                   <li>Input images <b>ZRatio</b> (ratio between slice spacing and pixel size, default to 1)</li>
                                   </ul>
                                   
-								  <p>The buttons on the right side are used to save/load a project and to exit the panel. To load a journal, press the button <b>Journal1</b> and browse to its file. Let's open the 2D journal <font color="magenta">'Tissue_SegWaterTiles.jl'</font> from previous section. Loading a journal reads the input and output folders configured in its file and display them in the fields <b>I</b> and <b>O</b> above and below the journal name. These fields can be manually edited if required.</p>
+								  <p>The buttons on the right side are used to save/load a project and to exit the panel. To load a journal, press the button <b>Journal1</b> and browse to its file. Let's open the 2D journal <font color="magenta">'Tissue_SegWaterTiles.jl'</font> again. Loading a journal reads the input and output folders configured in its file and display them in the fields <b>I</b> and <b>O</b> above and below the journal name. These fields can be manually edited if required.</p>
 
 								  <div class="screenshot-holder">
 								    	<img class="img-gui" src="assets/images/GUI.png" alt="screenshot" width="480">
@@ -179,16 +179,37 @@
 							<h2 class="section-title">Sample Projects</h2>
                                <div class="section-block">	  
 				    			  <p>Several sample projects that can be loaded from <b>LOBSTER</b> Panel are described below. They illustrate how to export 3D models and perform object tracking. All of these projects can be found in <b>/Projects</b> folder.
-
+								  <br />
+								  
+								  <p><b>Tracing blood vessels from 3D images, exporting to SWC format and visualizing the model</b></p>
                                   <p>Open project <font color="magenta">'BloodVesselsTracing.mat'</font>, click <b>Run All</b> and visualize the output models (SWC filament networks) by loading the <b>.SWC</b> files from <a href="https://janeliascicomp.github.io/SharkViewer/" target="_blank">this webpage</a>.</p>
+								  <br />
                                   
-								  <p>Open project <font color="magenta">'CellPilar3DMesh.mat'</font>, click <b>Run All</b> and visualize the output models (STL mesh) by drag and droping them to <a href="https://www.viewstl.com/" target="_blank">this web page</a>. For larger meshes, it is recommended to use <a href="http://www.meshlab.net/" target="_blank">MeshLab</a>.</p>
+								  <p><b>Segmenting nuclei from 3D images, exporting to STL format and visualizing the mesh</b></p>
+								  <p>Open project <font color="magenta">'CellPilar3DMesh.mat'</font>, click <b>Run All</b> and visualize the output models (STL mesh) by drag and droping them to <a href="https://www.viewstl.com/" target="_blank">this web page</a>. For larger meshes, it is recommended to use <a href="http://www.meshlab.net/" target="_blank">MeshLab</a>.
+								  </p>
+								  <br />
 								  
-								  <p>Open project <font color="magenta">'LymphGlandCellInsight.mat'</font>, click <b>Run All</b>. Open ImageJ and drag and drop the macro CellInsight (from <b>Tools/CellInsight/CellInsight.ijm</b>). On first usage, you need to copy the file <b>GetString.ijm</b> (from the same folder) to ImageJ <b>macros</b> folder. Drag and drop the input image (the input folder is opened since the <b>.xls</b> CellInsight file is exported inside). Launch <b>CellInsight.ijm</b> and press <b>Import</b> to load the object markers. The object markers can be explored and edited (see <a href="https://drive.google.com/file/d/1Sy_wuPBjSklokqqrgzfDk4QRdLVWU5OU/view?usp=sharing" target="_blank"> CellInsight documentation</a>). Large images can be opened in virtual stack mode (drag and drop image to ImageJ bar >> until <b>Open as Virtual Stack</b> is displayed). Now, drag and drop the report file (<b>.csv</b>) to ImageJ and drag and drop + run the macro <b>Tools/Montager.ijm</b>. This will create an interactive montage of all detected objects, clicking an object jump to its position in the original image. The input image can also be opened in virtual stack mode to handle images of unlimited size.</p>
+								  <p><b>Detecting nuclei from 3D images, exporting the markers to CellInsight and editing them</b></p>
+								  <p>Open project <font color="magenta">'LymphGlandCellInsight.mat'</font>, click <b>Run All</b>. Open ImageJ and drag and drop the macro CellInsight (from <b>Tools/CellInsight/CellInsight.ijm</b>). On first usage, you need to copy the file <b>GetString.ijm</b> (from the same folder) to ImageJ <b>macros</b> folder. Drag and drop the input image (the input folder is opened since the <b>.xls</b> CellInsight file is exported inside). Launch <b>CellInsight.ijm</b> and press <b>Import</b> to load the object markers. The object markers can be explored and edited (see <a href="https://drive.google.com/file/d/1Sy_wuPBjSklokqqrgzfDk4QRdLVWU5OU/view?usp=sharing" target="_blank"> CellInsight documentation</a>). Large images can be opened in virtual stack mode (drag and drop image to ImageJ bar >> until <b>Open as Virtual Stack</b> is displayed).
+								  </p>
+								  <br />
 								  
-								  <p>Open project <font color="magenta">'HeLaTracking.mat'</font>. This project performs tracking of dividing cells from a sequence of 2D images (<b>TL</b> is enabled to specify that <b>Journal2</b> is a time-lapse journal). As can be noticed, <b>I2</b> points to <b>O1</b> since the 2D images are first segmented into object masks by the first journal before being tracked by the second journal. Measuring the output of the second journal brings 3 report files: area, CMx and CMy (object centroids x and y position in the images). The results can be visualized by running the ImageJ macro <b>Tools/OverlayTrackedObjects.ijm</b> and selecting the input from the first journal as input folder and the output of the second journal as output folder (label mask). You will notice a small error for cell on top left in the first time point. This is because the tracker expects that the segmentation mask of first time point is manually corrected. You can do it before launching <b>Journal2</b> by opening the first frame (click <b>Journal1 Show Out</b>) and use the macro <b>Tools/MergeParticles</b> to assist correction: Install the macro (Plugins >> Macro >> Install...). Then use ImageJ wand tool to select the pairs of particles to be merged and press <b>F1</b>. Save the image after edition and Run <b>Journal2</b> and <b>Measure 2</b> (<b>do not Run All!</b> or output from <b>Journal 1</b> will be overwritten</b>).</p>
+								  <p><b>Detecting nuclei from 3D images, exporting the markers as an ImageJ interactive montage</b></p>
+								  Now, drag and drop the report file (<b>.csv</b>) from the previous project to ImageJ and drag and drop + run the macro <b>Tools/Montager.ijm</b>. This will create an interactive montage of all detected objects, clicking an object jump to its position in the original image. The input image can also be opened in virtual stack mode to handle images of unlimited size.
+								  </p>
+								  <br />
 								  
-								  <p>To process 3D images of unlimited size, it is necessary to configure journals to do so by defining the variable <b>Brick</b>. Open project <font color="magenta">'CellPilar_brcks.mat'</font> for an example.</p>
+								  <p><b>Segmenting 2D objects from a time-lapse, tracking them and exploring the results in ImageJ</b></p>
+								  <p>Open project <font color="magenta">'HeLaTracking.mat'</font>. This project performs tracking of dividing cells from a sequence of 2D images (<b>TL</b> is enabled to specify that <b>Journal2</b> is a time-lapse journal). As can be noticed, <b>I2</b> points to <b>O1</b> since the 2D images are first segmented into object masks by the first journal before being tracked by the second journal. Measuring the output of the second journal brings 3 report files: area, <b>CMx</b> and <b>CMy</b> (object centroids <b>X</b> and <b>Y</b> position in the images). The results can be visualized by running the ImageJ macro <b>Tools/OverlayTrackedObjects.ijm</b> and selecting the input from the first journal as input folder and the output of the second journal as output folder (label mask).
+								  </p>
+								  <p>
+								  You will notice a small error for cell on top left in the first time point. This is because the tracker expects that the segmentation mask of first time point is manually corrected. You can do it before launching <b>Journal2</b> by opening the first frame (click <b>Journal1 Show Out</b>) and use the macro <b>Tools/MergeParticles</b> to assist correction: Install the macro (Plugins >> Macro >> Install...). Then use ImageJ wand tool to select the pairs of particles to be merged and press <b>F1</b>. Save the image after edition and Run <b>Journal2</b> and <b>Measure 2</b> (<b>do not Run All!</b> or output from <b>Journal 1</b> will be overwritten</b>).
+								  </p>
+								  <br />
+								  
+								  <p><b>Processing large 3D images</b></p>
+								  <p>To process 3D images of unlimited size, it is necessary to configure journals to do so by defining the variable <b>Brick</b>. Open project <font color="magenta">'CellPilar_brcks.mat'</font> for an example. In this project the sample image is not large but the project is configured to process large images. If you edit <b>Journal 1</b> you will notice that the variable <b>Brick</b> is defined and set to 128 and that the variable <b>GaurdBand</b> is defined and set to 64. This instructs <b>JENI</b> and <b>IRMA</b> to process the image by bricks of size 128 x 128 x Number of slices of the original image, with an overlap of 64 pixels between bricks.</p>
 								  
                             </div>
                             </section><!--//doc-section-->

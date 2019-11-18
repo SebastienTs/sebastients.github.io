@@ -56,7 +56,7 @@
                                 <h2 class="section-title">Identifying Objects (JENI)</h2>
                                 <div class="section-block">
                                 	<p>
-                                	Workflows are configured inside <a href="#journals-section">journals</a>, human readable text files configuring input/output folders, the sequence of <b>LOBSTER</b> functions to apply to each input image and their associated parameters. Journals are processed by <b>JENI</b> from MATLAB console by typing:
+                                	Workflows identifying objects are configured inside <a href="#journals-section">journals</a>, human readable text files configuring input/output folders, the sequence of <b>LOBSTER</b> functions to apply to each input image and their associated parameters. Journals are processed by <b>JENI</b> from MATLAB console by typing:
                                   	<ul style="list-style: none;">
                                   	<li>>> <b>JENI</b>();</li>
 									<li>>> <b>JENI</b>(<font color="magenta">‘Tissue_SegWaterTiles.jl’</font>);</li>
@@ -91,7 +91,7 @@
                                   <p>>> <b>IRMA</b>(… , <font color="magenta">‘PathToInputFolder’</font>, <font color="magenta">‘ChanFilter’</font>);</p>
                                   <ul>
                                   <li><font color="magenta">‘PathToInputFolder’</font>: full path or InputFolder (if stored from <b>JENI</b> call)</li>						
-								  <li><font color="magenta">‘ChanFilter’</font>: text string such as <font color="magenta">'*_C01.tif'</font> where <b>*</b> is a whild card. The intensity statistics inside the object masks are only measured in the images with name matching <font color="magenta">‘ChanFilter’</font>.</li>
+								  <li><font color="magenta">‘ChanFilter’</font>: text string such as <font color="magenta">'*_C01.tif'</font> where <b>*</b> is a wild card. The intensity statistics inside the object masks are only measured in the images with name matching <font color="magenta">‘ChanFilter’</font>.</li>
                                   </ul>
                                   <p>Object intensity measurements is illustrated in <a href="https://drive.google.com/file/d/1toy-_qnBCSnqBVzXAsRnNg6m0WB467Q6/view?usp=sharing" target="_blank">this video</a>.  
                             	</div>
@@ -116,13 +116,13 @@
                                   <li><font color="magenta">‘PathtoExpFolder’</font>: model exportation folder</li>
                                   <li><b>ExportationFormat</b>: '<b>SWC</b>' (default) or '<b>OBJ</b>'</li>
                                   </ul>
-                                  <li>‘<b>Trks</b>’ {ZRatio,'',‘PathtoExpFolder’} exports object tracks as <b>SWC</b> model</li>
+                                  <li>‘<b>Trks</b>’ {<b>ZRatio</b>,<b>''</b>,<font color="magenta">‘PathtoExpFolder’</font>} exports object tracks as <b>SWC</b> model</li>
                                   <ul>
-                                   <li><b>ZRatio</b>: Time strecth for 2D time-lapses</li>
+                                   <li><b>ZRatio</b>: Time stretching for 2D time-lapses</li>
                                   <li><font color="magenta">‘PathtoExpFolder’</font>: model exportation folder</li>
                                   </ul>
                                   </ul>
-                                  <p>Object markers <b>'Spts'</b> can be exported as <b>CellInsight</b> project (.xls file) from MATLAB console:</p>
+                                  <p>Object markers <b>'Spts'</b> can be exported as <b>CellInsight</b> project (<b>.xls</b> file) from MATLAB console:</p>
                                   <p>>> <b>JOSE</b>(<font color="magenta">'PathToReportFolder'</font>,'<b>Spts</b>', <font color="magenta">'PathToExportFolder'</font>,'<b>CellInsight</b>', <b>''</b>, <b>''</b>);</p>
                                   <p>It is recommended to export <b>CellInsight</b> project to input image folder since CellInsight attempts to import the project from this location by default.
                                   See <a href="https://drive.google.com/file/d/1oEUen0XjYvNXZoVFkxTslmZv7VzHRGHe/view?usp=sharing" target="_blank">this video</a> for basic usage of <b>CellInsight</b> ImageJ macro.</p>         
