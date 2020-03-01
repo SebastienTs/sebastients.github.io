@@ -51,7 +51,7 @@
 
 						<section id="intro-section" class="doc-section">
 						
-                    	<p><b>LOBSTER</b> is an image analysis environment to identify biological objects in microscopy images and measure their spatial location, geometry, dynamics and intensity distribution. Multiple images can be processed in one go and the software sets no limit on image size. The objects can be exported as 2D/3D models for external software, for instance for the exploration or simulation of the processes under study. </p>
+                    	<p><b>LOBSTER</b> is an image analysis environment to identify biological objects in microscopy images, and measure their spatial location, geometry, dynamics and intensity distribution. The objects can be exported as 2D/3D models, for instance for the exploration or simulation of the processes under study in external software. Multiple images can be processed in one go and their size is not limited by the main memory of the workstation.</p>
 
 						</section>
 
@@ -60,14 +60,14 @@
                                 <h2 class="section-title">Setting Up</h2>
                                 <div class="section-block">
 
-                                  <p>Assuming that <b>MATLAB</b> (version >=2015a), <b>Image processing</b> and <b>Statistics & Machine Learning</b> toolboxes are installed, setting up <b>LOBSTER</b> is extremely simple:</p>
+                                  <p>Assuming that <b>MATLAB</b> (version >=2015a), <b>Image processing</b> and <b>Statistics & Machine Learning</b> toolboxes are installed, setting up <b>LOBSTER</b> is simple:</p>
 								  <ul>
-                                   <li>Download the source code of the <a href="https://github.com/SebastienTs/LOBSTER" target="_blank"> software</a> (green button)</li>
-                                   <li>Unzip the content to an empty folder where MATLAB has write access</li> 
-                                   <li>Create an empty folder <b>/Images</b> inside the installation folder where to unzip the content of <a href="https://drive.google.com/file/d/18A0sm-69TTEl-19DAprqiLHmO-0nBkg4/view?usp=sharing" target="_blank">this archive</a> (sample images)</li>
-                                   <li>Create an empty folder <b>/Results</b> inside the installation folder where to unzip the content of <a href="https://drive.google.com/file/d/1GiJd-JfBvOHJcm_WOB1_gAvMuRAZzOy3/view?usp=sharing" target="_blank">this archive</a> (sample results)</li>
+                                   <li>Download the <a href="https://github.com/SebastienTs/LOBSTER" target="_blank"> source code</a> (green button)</li>
+                                   <li>Unzip the content to an empty folder where <b>MATLAB</b> has write access</li> 
+                                   <li>Create an empty folder <b>/Images</b> inside the installation folder and unzip <a href="https://drive.google.com/file/d/18A0sm-69TTEl-19DAprqiLHmO-0nBkg4/view?usp=sharing" target="_blank">this archive</a> (sample images)</li>
+                                   <li>Create an empty folder <b>/Results</b> inside the installation folder and unzip <a href="https://drive.google.com/file/d/1GiJd-JfBvOHJcm_WOB1_gAvMuRAZzOy3/view?usp=sharing" target="_blank">this archive</a> (sample results).</li>
                                    </ul>
-                                   Windows is highly recommended but <b>LOBSTER</b> should be compatible with all major operating systems (except for the 3D renderer). Refer to <a href="https://drive.google.com/file/d/1hn9RIoW2sG8nhYN_fLvrPlskLbM0sao7/view?usp=sharing" target="_blank"> documentation</a> for details (<b>Requirements, Installation and Startup</b>).
+                                   Microsoft Windows (7/8/10) is recommended, but most <b>LOBSTER</b> features are supported by the major operating systems. Refer to <a href="https://drive.google.com/file/d/1hn9RIoW2sG8nhYN_fLvrPlskLbM0sao7/view?usp=sharing" target="_blank"> documentation</a> for details (<b>Requirements, Installation and Startup</b>).
 
                                   </div>
                             </section><!--//doc-section-->
@@ -77,14 +77,12 @@
                             <section id="init-section" class="doc-section">
                                 <h2 class="section-title">Initializing</h2>
                                 <div class="section-block">
-                                   <p><b>LOBSTER should be initialized before using any of its components</b>: 
-                                   <ul>	
-                                   <li>Launch MATLAB</li>
-
+                                   <p>Launch <b>MATLAB</b> and type the following lines from the console:</p>
+								   <ul>
                                    <li>>> <b>cd E:/LOBSTER</b> (update path to installation folder)</li>
                                    <li>>> <b>init</b>
                                    </ul>
-                                   This action <b>must be performed once each time before using LOBSTER</b>. The procedure is illustrated at the beginning of <a href="https://drive.google.com/file/d/1N9KWKvS52NMGZH0WiYF8bwJLZsvLFx6J/view?usp=sharing" target="_blank">this video</a>.  
+                                   The procedure is illustrated at the beginning of <a href="https://drive.google.com/file/d/1N9KWKvS52NMGZH0WiYF8bwJLZsvLFx6J/view?usp=sharing" target="_blank">this video</a>.  
 
                                   </div>
                             </section><!--//doc-section-->
@@ -95,41 +93,25 @@
                             <section id="gui-section" class="doc-section">
                                 <h2 class="section-title">LOBSTER Panel</h2>
                                 <div class="section-block">
-                                	<p>To start <b>LOBSTER</b> Panel, type >> <b>LOBSTER</b> in the console.</p>
-									<p>The panel enables to load up to 2 object identification workflows (journals), trigger object measurements and export object models from the results. The important items from the upper section are (from left to right):</p>
-
-                                  <ul>
-                                  <li>Input images dimension (2D/3D)</li>
-                                  <li>Whether object models should be exported or not</li>
-                                  <li><b>ZRatio</b>, the ratio between slice spacing and pixel size (only relevant for 3D images).</li>
-                                  </ul>
-                                  
-                                   <p>For the remaining items, refer to the context help provided when hovering over them.</p>
-								   <p>The buttons on the right side are used to save/load a project and to cleanly exit the Panel.</p>
-								   <p>To load a journal, click the button <b>Journal1</b> and select it from the file browser. For instance, load the 2D journal <font color="magenta">'Tissue_SegWaterTiles.jl'</font> used in the previous section. The input and output folders configured in the journal are automatically parsed and displayed in the fields <b>I</b> and <b>O</b>. These fields can also be set from a file browser by clicking <b>I1/I2/O1/O2</b>, or be manually edited. This is a convenient way to re-use journals to process different images.</p>
-
-								  <div class="screenshot-holder">
-								    	<img class="img-gui" src="assets/images/GUI.png" alt="screenshot" width="480">
-				    			  </div>
-
-                                  <p>To launch a journal, click the associated <b>Run</b> button. By default the journal is processed but nothing is shown (batch mode), this behaviour can be toggled from the button <b>Batch</b> located in the lower part of the <b>Panel</b>. If the results are not satisfactory, interrupt the journal by pressing <b>'q'</b>, edit its parameters by clicking associated <b>Edit</b> button, save the file (floppy disk or <b>Ctrl+S</b>) from MATLAB editor, and relaunch the journal. Once the results are satisfactory, toggle back to batch mode and launch the journal to process all images from the input folder.</p>
-								  
-								  <p>The input and output folders of a journal can be browsed by clicking <b>Show In</b> and <b>Show Out</b>.</p>
-
-                                  <p>To perform measurements on the objects identified by <b>Journal1</b>, set the upper drop-down selector (object mask folder) to <b>O1</b> (that is, the output of <b>Journal 1</b>) and set the lower drop-down selector to '<b>Objs</b>' (plain objects measurements). Press <b>Run Measure 1</b>. Upon completion, press <b>Show Reports</b> to browse the folder holding the <b>.csv</b> reports.</p>
-
-								  <p>It is possible to open an existing project by clicking <b>Load</b> button, for instance load the project <font color="magenta">'FISH.mat'</font>. This project loads two journals: the first journal identifies nuclei (DAPI channel) and the the second identifies FISH markers (as object seeds). The aim is to count the number of FISH markers inside every nucleus. Since both journals point to the same input folder, channel selection (DAPI/FISH) is performed inside the journals. To understand how, you can refer to <a href="journals.html" target="_blank">this page</a> to get more information about journals, but this is not strictly necessary at this point.</p>
-								  
-                                  <div class="screenshot-holder">
+                                	<p>To start the Panel, type >> <b>LOBSTER</b> in the console.</p>
+									<p>From this interface, you can load up to 2 object identification workflows (journals), trigger object measurements and export object models. To load a journal, click the button <b>Journal1</b> and select it from the file browser.</p>
+									
+									<div class="screenshot-holder">
 								    	<img class="img-gui2" src="assets/images/GUI2.png" alt="screenshot" width="480">
-				    			  </div>
+									</div>
 
-								  <p><b>Measure 1</b> is set to <b>O1</b> (nuclei mask) and the drop-down selector right below <b>O1</b> (channel folder) is set to <b>O2</b>, that is the output of <b>Journal2</b> (FISH seed mask). The bottom drop-down configures the intensity measurement channel, here used to count the number of FISH markers per nucleus (read from the report column <b>Number of non null pixels</b>).</p>
+								   <p> For instance, load the 2D journal <font color="magenta">'Tissue_SegWaterTiles.jl'</font> used in the previous section. The input and output folders configured in the journal are automatically parsed and displayed in the fields <b>I</b> and <b>O</b>. These fields can also be manually edited or set from a file browser by clicking the corresponding buttons. This is convenient to use existing journals to process new image folders.</p>
+
+                                  <p>To launch the journal, click <b>Run Journal 1</b>. By default the journal is processed but nothing is shown (batch mode), this behaviour can be changed from the button <b>Batch</b> located at the bottom of the <b>Panel</b>. Every input image is displayed together with the results. Simply press <b>'x'</b> to proceed to the next image. If the results are not satisfactory, you can tweak the parameters of the functions called by the journal (<b>Edit</b>), save the journal (floppy disk) and launch it again. If many images are present in the input folder and you want to skip them, interrupt the journal by pressing <b>'q'</b>. Once the results are satisfactory, toggle to batch mode and launch the journal to process all images from the input folder.</p>
 								  
-								  <p><b>Measure 1</b> object mask is set to <b>O1</b> (nuclei mask) and the drop-down selector right below <b>O1</b> is set to <b>O2</b>, <b>Journal2</b> output (FISH seed mask). This second drop-down configures the intensity measurement channel, here used to count the number of FISH markers per nucleus (number of non null pixels). The general principles of how object masks are used to perform measurements is detailed in this <a href="#architecture-section">section</a>.
+								  <p>The input and output folders of a journal can be browsed by clicking <b>Show In</b> and <b>Show Out</b>. To perform measurements on the objects identified by <b>Journal1</b>, set the upper drop-down selector (object mask folder) to <b>O1</b> (that is, the output of <b>Journal 1</b>) and set the lower drop-down selector to '<b>Objs</b>' (plain objects measurements). Press <b>Run Measure 1</b>. Upon completion, press <b>Show Reports</b> to browse the folder holding the <b>CSV</b> reports.</p>
+
+								  <p>It is possible to open an existing project by clicking <b>Load</b>, for instance load the project <font color="magenta">'FISH.mat'</font>. This project holds two journals: the first journal identifies nuclei (DAPI channel) and the the second journal identifies FISH signals (seed mask, one non null pixel per spot). The aim is to count the number of FISH markers inside every nucleus.</p>  
+								  
+								  <p>Since both journals point to the same input folder, the channel selection (DAPI/FISH) is performed inside the journals. To understand how, you can refer to <a href="journals.html" target="_blank">this page</a>, but this is not strictly necessary at this point. <b>Measure 1</b> object mask is set to <b>O1</b> (nuclei mask) since we want to measure nuclei, and the drop-down selector right below (intensity measurement channel) is set to <b>O2</b> (<b>Journal2</b> output): this is because we want to count the number of FISH markers per nucleus (number of non null pixels in FISH seed mask). The general principles of how object masks are used to perform measurements is detailed in this <a href="#architecture-section">section</a>.
 								  </p> 
 
-								  <p>Finally, journal calls and measurements can be all triggered sequentially by pressing <b>Run All</b>. It is advised <b>not to interact with the Panel while an operation is performed</b>, this can be checked from the red color of the <b>Run All</b> button and from the log bar to the right.</p>
+								  <p>Finally, journal calls and measurements can be all triggered sequentially by pressing <b>Run All</b>. Refer to the context help provided when hovering over the other items.</p>
 								  </div>
                             </section><!--//doc-section-->
                         </div><!--//content-inner-->
