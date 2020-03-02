@@ -79,8 +79,7 @@
                                 <div class="section-block">
                                    <p>Launch <b>MATLAB</b> and type the following lines from the console:</p>
                                    <p style="margin-left:2em;">>> <b>cd E:/LOBSTER</b> (update path to installation folder)</p>
-                                   <p style="margin-left:2em;">>> <b>init</b></p>
-                                   The procedure is illustrated in this <a href="https://drive.google.com/file/d/1N9KWKvS52NMGZH0WiYF8bwJLZsvLFx6J/view?usp=sharing" target="_blank">video</a>.  
+                                   <p style="margin-left:2em;">>> <b>init</b></p>  
 
                                   </div>
                             </section><!--//doc-section-->
@@ -92,21 +91,21 @@
                                 <h2 class="section-title">LOBSTER Panel</h2>
                                 <div class="section-block">
                                 	<p>To start the Panel, type >> <b>LOBSTER</b>.</p>
-									<p>From this interface, you can load up to 2 object identification workflows (journals), trigger object measurements and export object models. To load a journal, click <b>Journal1</b> and select it from the file browser.</p>
+									<p>From this interface, you can load up to 2 object identification workflows (journals), trigger object measurements and export object models. To load a journal, click <b>Journal1</b> and select its file from the browser (for instance <font color="magenta">'Tissue_SegWaterTiles.jl'</font>).</p>
 									
 									<div class="screenshot-holder">
 								    	<img class="img-gui2" src="assets/images/GUI2.png" alt="screenshot" width="480">
 									</div>
 
-								   <p> For instance, load the 2D journal <font color="magenta">'Tissue_SegWaterTiles.jl'</font>. The input and output folders configured in the journal are automatically parsed and displayed in the fields <b>I</b> and <b>O</b>. These fields can also be manually edited or set from a file browser by clicking the corresponding buttons. This is convenient to use existing journals to process new image folders.</p>
+								   <p>The input and output folders are parsed from the journal and displayed in the fields <b>I</b> and <b>O</b>. It is also possible to edit the path to these folders to use existing journals to process different images.</p>
 
-                                  <p>To launch the journal, click <b>Run Journal 1</b>. By default the journal is processed but nothing is shown (batch mode), this behaviour can be changed from the button <b>Batch</b> located at the bottom. Every input image is displayed together with the results, press <b>'m'</b> to toggle the results, and <b>'x'</b> to proceed to the next image. If many images are present in the input folder and you want to skip them, press <b>'q'</b>.</p>
+                                  <p>To launch the journal, click <b>Run Journal 1</b>. By default, no image is displayed (batch mode), this behaviour can be modified by pressing the <b>Batch</b> button located at the bottom of the panel. The images from the input folder are processed sequentially, and they are displayed together with the results from the workflow configured in the journal. Press <b>'m'</b> to toggle the display of the results, and <b>'x'</b> to proceed to the next image. To stop the processing when an image is displayed, press <b>'q'</b>. To stop the processing while an operation is performed, press <b>CTRL+C</b>.</p>
 								  
-								  <p>If the results are not satisfactory, you can tweak the parameters of the functions called by the journal (<b>Edit</b>), save the journal (floppy disk) and launch it again. From the journal editor, press <b>F1</b> while hovering over a function (<b>@</b>) to get help on its parameters.  Once the results are satisfactory, toggle to batch mode and launch the journal to process all images from the input folder.</p>
+								  <p>If the results are not satisfactory, tweak the journal parameters from the editor (<b>Edit</b>), save it (floppy disk) and launch it again. From the journal editor, press <b>F1</b> while hovering over a function (<b>@</b>) to get help on its parameters. Once the results are satisfactory, set batch mode and launch the journal on all input images. The input and output folders of a journal can be browsed by clicking <b>Show In</b> and <b>Show Out</b>. This is illustrated in this <a href="https://drive.google.com/file/d/1N9KWKvS52NMGZH0WiYF8bwJLZsvLFx6J/view?usp=sharing" target="_blank">video</a>, in this case the journal is called from console, and the folders are browsed from console hyperlinks. To get more information on journals, refer to <a href="journals.html" target="_blank">this page</a>, but this is not strictly necessary at this point.</p>
 								  
-								  <p>The input and output folders of a journal can be browsed by clicking <b>Show In</b> and <b>Show Out</b>. To perform measurements on the objects identified by <b>Journal1</b>, set the upper drop-down selector (object mask folder) to <b>O1</b> (that is, the output of <b>Journal 1</b>) and set the lower drop-down selector to '<b>Objs</b>' (plain objects measurements). Press <b>Run Measure 1</b>. Upon completion, press <b>Show Reports</b> to browse the folder holding the <b>CSV</b> reports.</p>
+								  <p> To perform measurements on the objects identified by <b>Journal1</b>, set the upper drop-down selector (object mask folder) to <b>O1</b> (that is, the output of <b>Journal 1</b>) and set the lower drop-down selector to '<b>Objs</b>' (plain objects measurements). Press <b>Run Measure 1</b>. Upon completion, press <b>Show Reports</b> to browse the folder holding the <b>CSV</b> reports.</p>
 								  
-								  <p>Finally, journal calls and measurements can be all triggered sequentially by pressing <b>Run All</b>. Refer to the context help provided when hovering over the other items.</p>
+								  <p>Journal processing and measurements can be performed in one go by pressing <b>Run All</b>. The current operation is displayed in the bottom right field and <b>Run all</b> is set to red to show until all images are processed. Refer to the context help provided when hovering over the other items.</p>
 
 								  </div>
                             </section><!--//doc-section-->
@@ -128,19 +127,9 @@
 								  <p>Load project <font color="magenta">'CellPilar3DMesh.mat'</font>, click <b>Run All</b> and visualize the STL meshes by drag and dropping them to <a href="https://www.viewstl.com/" target="_blank">this web page</a>. For larger meshes, it is recommended to use <a href="http://www.meshlab.net/" target="_blank">MeshLab</a>.
 								  </p>
 								  <br />
-								  
-								  <p><b>Counting FISH spots inside nuclei</b></p>
-								  
-								  Load the project <font color="magenta">'FISH.mat'</font>. This project holds two journals: the first journal identifies nuclei (DAPI channel) and the the second journal identifies FISH signals (seed mask, one non null pixel per spot). The aim is to count the number of FISH markers inside every nucleus.</p>  
-								  
-								  The source object mask for <b>Measure 1</b> is set to <b>O1</b> (nuclei mask, output of <b>Journal 1</b>) since we want to measure nuclei, and the drop-down selector right below (intensity measurement channel) is set to <b>O2</b> (<b>Journal2</b> output): this is because we want to count the number of FISH markers per nucleus (number of non null pixels in FISH seed mask). The general principles of how object masks are used to perform measurements is detailed in this <a href="#architecture-section">section</a>.
-								  </p> 
 
-								  <p><u>Note</u>: In this particular case, since both journals point to the same input folder, the channel selection (DAPI/FISH) is performed inside the journals. To understand how, you can refer to <a href="journals.html" target="_blank">this page</a>, but this is not strictly necessary at this point.</p>
-								  <br />
-								  
 								  <p><b>Exporting detected nuclei as an ImageJ interactive montage</b></p>
-								  Drag and drop the report file (<b>.csv</b>) from the previous project to ImageJ, open the input image and run the macro <b>Tools/Montager.ijm</b>. This builds an interactive montage of all detected objects: clicking an object in the montage jumps to its position in the original image. The input image can also be opened in virtual stack mode to handle large images not fitting in main memory (drag and drop the image to ImageJ bar >> until <b>Open as Virtual Stack</b> is displayed).
+								  Drag and drop the report file (<b>.csv</b>) from the previous project to ImageJ, open the input image and run the macro <b>Tools/Montager.ijm</b>. This builds an interactive montage of all detected objects: clicking an object in the montage jumps to its position in the original image. The input image can also be opened in virtual stack mode to handle large images not fitting in main memory (drag and drop the image to ImageJ bar <b>>></b> symbol so that <b>Open as Virtual Stack</b> is displayed).
 								  </p>
 								  <br />
 								  
@@ -148,14 +137,14 @@
 								  <p>Segmenting 2D objects from a time-lapse, tracking the objects, exploring results in ImageJ and plotting in Matlab.</p>
 								  <p>Load project <font color="magenta">'HeLaTracking.mat'</font>. This project performs the segmentation and tracking of dividing nuclei from a sequence of 2D images. <b>TL</b> is enabled to specify that <b>Journal2</b> is a time-lapse journal perfroming tracking (.jlm extension).</p>
 								  <p>This time, <b>I2</b> points to <b>O1</b> since the images are first segmented into object masks (Journal 1) before being tracked (Journal 2).</p>
-								  <p>When running the first journal, an image window pops up at the end of the processing. This is because the tracker (Journal 2) requires the best possible segmentation mask at first time point. To this end, the user needs to correct erroneous object splitting (most common errors) by drawing small rectangles around false cut lines. Beware to maximize the image window (or zoom around), to make sure that all objects are properly merged. Exit mask correction by double clicking on the image.</p>
+								  <p>When running the first journal, an image window pops up at the end of the processing. This is because the tracker (Journal 2) requires the best possible segmentation mask at first time point. To this end, the user needs to correct erroneous object splitting (most common errors) by drawing small rectangles around false cut lines (hold mouse left button). Beware to maximize the image window (or zoom around), to make sure that all objects are properly merged. Exit mask correction by clicking on the image.</p>
 								  <p>Measuring <b>O2</b> (Object masks) brings 3 report files: objects areas, <b>CMx</b> and <b>CMy</b> (objects centroids). Tracking results can be visualized from ImageJ macro <b>Tools/OverlayTrackedObjects.ijm</b> by selecting <b>O1</b> as input folder and <b>O2</b> as output folder.</p>
 								  <p>To plot some of the measurements, type <b>PlotTrksMeasurements</b> in MATLAB and select the .csv file of the measurement you want to plot. Type the ID of the objects you want to plot.</p>
 								  <br />
 								  
 								  <p><b>Tracking nuclei from a 3D time-lapse</b></p>
-								  <p>Segmenting 3D objects from a time-lapse, tracking the objects and exploring the tracks in <b>ImageJ Mastodon</b>.</p>
-								  <p>Load project <font color="magenta">'Mastodon3D_Test.mat'</font> and click <b>Run All</b>. To visualize the 3D tracks, an amazing tool is <a href="https://github.com/mastodon-sc/mastodon" target="_blank">ImageJ Mastodon</a>, leveraging the awesome <a href="https://imagej.net/BigDataViewer" target="_blank">ImageJ Big Data Viewer</a>. To use <b>Mastodon</b>, it is first required to convert the input image to <b>Big Data Viewer</b> format by opening the image in ImageJ, making sure the dimensions are right from Image>Properties (Z and T can sometimes be swapped), and calling <b>Plugins > BigDataViewer > Export Current Image as XML/HDF5</b>. It is recommended to export the image to the same folder as the input image folder and with the default name (<b>export.xml</b>).</p> 
+								  <p>Segmenting 3D objects from a time-lapse, tracking the objects and exploring the tracks in <b>Mastodon</b>.</p>
+								  <p>Load project <font color="magenta">'Mastodon3D_Test.mat'</font> and click <b>Run All</b>. To visualize the 3D tracks, an amazing tool is <a href="https://github.com/mastodon-sc/mastodon" target="_blank">Mastodon</a>, leveraging the awesome <a href="https://imagej.net/BigDataViewer" target="_blank">ImageJ Big Data Viewer</a>. To use <b>Mastodon</b>, it is first required to convert the input image to <b>Big Data Viewer</b> format by opening the image in ImageJ and calling <b>Plugins > BigDataViewer > Export Current Image as XML/HDF5</b>. Before doing so, make sure the dimensions are right from Image>Properties (especially Z and T). It is recommended to export the image to the same folder as the input image folder and with the default name (<b>export.xml</b>).</p> 
 								  
 								  <p><b>LOBSTER</b> tracks can be converted to a format importable by <b>Mastodon</b> by typing <b>MamutExport</b> in Matlab console, and selecting the required files/folders: the XML input file should be in <b>Images/Mastodon3D/export.xml</b> and tracking / report folders are respectively <b>O2</b> and <b>R2</b> for this project.</p>
 								  
@@ -170,6 +159,16 @@
 								  <p><u>Note</u>: The first time you use <b>CellInsight</b>, it is required to copy the file <b>GetString.ijm</b> to ImageJ <b>/macros</b> folder.</p>
 								  <p>Drag and drop the input image to ImageJ (click <b>Show In</b> to browse input folder). Launch <b>CellInsight.ijm</b> from ImageJ macro editor, and press <b>Import</b> to load <b>LOBSTER</b> object markers. The object markers can be explored and edited (see <a href="https://drive.google.com/file/d/1Sy_wuPBjSklokqqrgzfDk4QRdLVWU5OU/view?usp=sharing" target="_blank"> CellInsight documentation</a>). Exit <b>CellInsight</b> by clicking <b>Exit</b>, not by closing the image in ImageJ.</p>
 								  <p><u>Note</u>: Large images not fitting in main memory can be opened in virtual stack mode (drag and drop the image to ImageJ bar >> until <b>Open as Virtual Stack</b> is displayed).</p>
+								  <br />
+								  
+								  <p><b>Counting FISH spots inside nuclei</b></p>
+								  
+								  Load the project <font color="magenta">'FISH.mat'</font>. This project holds two journals: the first journal identifies nuclei (DAPI channel) and the the second journal identifies FISH signals (seed mask, one non null pixel per spot). The aim is to count the number of FISH markers inside every nucleus.</p>  
+								  
+								  The source object mask for <b>Measure 1</b> is set to <b>O1</b> (nuclei mask, output of <b>Journal 1</b>) since we want to measure nuclei, and the drop-down selector right below (intensity measurement channel) is set to <b>O2</b> (<b>Journal2</b> output): this is because we want to count the number of FISH markers per nucleus (number of non null pixels in FISH seed mask). The general principles of how object masks are used to perform measurements is detailed in this <a href="#architecture-section">section</a>.
+								  </p> 
+
+								  <p><u>Note</u>: In this particular case, since both journals point to the same input folder, the channel selection (DAPI/FISH) is performed inside the journals. To understand how, you can refer to <a href="journals.html" target="_blank">this page</a>.</p>
 								  <br />
 								  
 								  <p><b>Processing large 3D images</b></p>
@@ -188,7 +187,7 @@
 	                              Objects identification, measurements and modeling are performed sequentially and the results are stored in simple formats after each step. These operations are respectively performed by three computational modules called from MATLAB console (scripting) or <b>LOBSTER</b> Panel (Graphical User Interface). In this tutorial we cover the Panel, refer to <a href="scripting.html" target="_blank">this page</a> for scripting.
 				    			  </p>
                                   <div class="screenshot-holder">
-								    <img class="img-architecture" src="assets/images/architecture.png" alt="screenshot" width="480">
+								    <img class="img-architecture" src="assets/images/architecture.png" alt="screenshot" width="640">
 				    			  </div>
                                   <p>
                                   <b>JENI: Identifying objects</b></p>

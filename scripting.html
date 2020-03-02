@@ -49,23 +49,20 @@
                     
                     <div class="doc-content col-md-9 col-12 order-1">
 
-                    	<p><b>LOBSTER</b> panel is quite convenient to trigger journals, perform measurements and export objects 3D models, but it is limited to two journals and for some specific features it might be necessary to directly script the computational modules <b>JENI</b>, <b>IRMA</b>, and <b>JOSE</b> to build complex applications. This section provides an introduction to this topic.</p>
+                    	<p><b>LOBSTER</b> panel is handy to handle journals, perform measurements and export object models, but it is limited to two journals and for some more advanced features it might be necessary to directly script <b>LOBSTER</b> computational modules from the console. This section provides an introduction to this topic.</p>
 
                         <div class="content-inner">
                             <section id="jeni-section" class="doc-section">
                                 <h2 class="section-title">Identifying Objects (JENI)</h2>
                                 <div class="section-block">
                                 	<p>
-                                	Workflows identifying objects are configured inside <a href="#journals-section">journals</a>, human readable text files configuring input/output folders, the sequence of <b>LOBSTER</b> functions to apply to each input image and their associated parameters. Journals are processed by <b>JENI</b> from MATLAB console by typing:
+                                	Workflows identifying objects are configured inside <a href="journals.html" target="_blank">journals</a>, human readable text files configuring input/output folders, the sequence of <b>LOBSTER</b> functions to apply to each input image and their associated parameters. Journals are processed by <b>JENI</b> from MATLAB console by typing:
                                   	<ul style="list-style: none;">
                                   	<li>>> <b>JENI</b>();</li>
 									<li>>> <b>JENI</b>(<font color="magenta">‘Tissue_SegWaterTiles.jl’</font>);</li>
 									<li>>> <b>JENI</b>(<font color="magenta">‘C:/MyFolder/MyJournal.jl’</font>);</li>
 									</ul>
-									The first call opens a file browser to select the journal to launch, the second assumes that the journal file is located in <b>LOBSTER</b> <b>/Journals</b> folder and the third provides a complete path to the journal file.</p> 
-									</p>If the journal is configured to do so, every input image will be displayed together with the results. Simply close the image viewer or press <b>'X'</b> to proceed to the next image.
-									This is illustrated in <a href="https://drive.google.com/file/d/1N9KWKvS52NMGZH0WiYF8bwJLZsvLFx6J/view?usp=sharing" target="_blank">this video</a>. 
-									</p>
+									The first call opens a file browser to select the journal to launch, the second call assumes that the journal file is located in <b>LOBSTER</b> <b>/Journals</b> and the third call sets the complete path to the journal.</p>
 									<p>
 									If you plan some further operations such as measuring the object masks from output folder, Input and Output folder paths can be conveniently stored to MATLAB variables (placeholders) so as to be easily reused in later calls:
 									</p>
@@ -134,8 +131,7 @@
                             <section id="jobs-section" class="doc-section">
                                 <h2 class="section-title">Job Scripts</h2>
                                 <div class="section-block">
-                                <p>Job scripts are MATLAB files used to record the calls to <b>JENI</b>, <b>IRMA</b> and <b>JOSE</b> so as to automate their further execution. For instance the job script below (<b>/Jobs/FISM.m</b>)
-                                sequentially calls two journals: one segmenting nuclei into object masks and another one detecting FISH spots from another channel to output a seed mask. The number of spots per nuclei is then reported by calling <b>IRMA</b> and using the seed mask as intensity channel and the object mask as measurement mask.</p>
+                                <p>Job scripts are MATLAB files used to record sequential calls to <b>JENI</b>, <b>IRMA</b> and <b>JOSE</b> so as to automate their further execution. For instance the job script (<b>/Jobs/FISM.m</b>) sequentially calls two journals: one segmenting nuclei into object masks and another one detecting FISH spots from another channel to output a seed mask. The number of spots per nuclei is then reported by calling <b>IRMA</b> and using the seed mask as intensity channel and the object mask as measurement mask.</p>
                                 <p>
                                 <code>
                                 [InputFolder1 MaskFolder1] = GENI('FISH_nucseg.jl');<br />
@@ -144,8 +140,8 @@
 								</code>
 								</p>
 								<p>Note here that <b>GENI</b> was used instead of <b>JENI</b> to prevent image display and user interaction (equivalent to switch between Batch and Adjust in <b>LOBSTER</b> Panel). A video demo of this job script into action is provided <a href="https://drive.google.com/file/d/1d2tZiJDSmBWlcp65HaFTgdlqMcDExaSx/view?usp=sharing" target="_blank">here</a>.</p>
-								<p>Job scripts can be called from MATLAB console or by clicking there <b>.m</b> file and pressing the green arrow (equivalent to <b>Run All</b> of a <b>LOBSTER project</b>). Many sample Job Scripts are provided in <b>/Jobs</b> folder.</p>
-								<p>When <b>Run All</b> is pressed from the Panel, the job script performing the actions of the project is automatically logged to the console after processing. It is possible to copy these lines to a <b>.m</b> file and use it as a job script (e.g. to send to <b>LOBSTER</b> server or further edit it).</p>
+								<p>Job scripts can be called by typing their name from MATLAB console. Many sample Job Scripts are provided in <b>/Jobs</b> folder.</p>
+								<p><u>Note</u>: When <b>Run All</b> is pressed from the Panel, the job script performing the actions of the project is  logged to the console after processing. It is possible to copy these lines to an empty <b>.m</b> file and use it as a job script (e.g. to send to <b>LOBSTER</b> server or to further edit it).</p>
                             </div>
                             </section><!--//doc-section-->
                         </div><!--//content-inner-->
@@ -154,7 +150,7 @@
                             <section id="juli-section" class="doc-section">
                                 <h2 class="section-title">LOBSTER Image Analysis Server (JULI)</h2>
                                 <div class="section-block">
-                    				Job scripts can be sent to <b>JULI</b>, an image analysis server able to email results (.csv files, object models) upon job completion. For more details refer to <a href="https://drive.google.com/file/d/1hn9RIoW2sG8nhYN_fLvrPlskLbM0sao7/view?usp=sharing" target="_blank"><b>LOBSTER</b> documentation</a> (section <b>JULI</b>) or watch <a href="https://drive.google.com/file/d/1KEDM4sLVsZ2D25pdlr8bZnfK96diM0s1/view?usp=sharing" target="_blank">this video</a>.
+                    				Job scripts can be sent to <b>JULI</b>, an image analysis server able to email results (<b>CSV</b> files, object models) upon job completion. For more details refer to <a href="https://drive.google.com/file/d/1hn9RIoW2sG8nhYN_fLvrPlskLbM0sao7/view?usp=sharing" target="_blank"><b>LOBSTER</b> documentation</a> (section <b>JULI</b>) or watch <a href="https://drive.google.com/file/d/1KEDM4sLVsZ2D25pdlr8bZnfK96diM0s1/view?usp=sharing" target="_blank">this video</a>.
                     				</div>
                             </section><!--//doc-section-->
                         </div><!--//content-inner-->

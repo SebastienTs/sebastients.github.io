@@ -54,23 +54,19 @@
                                 <h2 class="section-title">Journals</h2>
                                 <div class="section-block">
                                   
-								  <p>Image analysis workflows to identify objects are configured inside <a href="#journals-section">journals</a>, human readable text files configuring input/output folders, the sequence of <b>LOBSTER</b> functions to apply to each input image and their associated parameters. Journals are processed by typing <b>JENI</b> in the console and selecting a journal from the file browser: </p>
-                                  	<ul style="list-style: none;">
-                                  	<li>>> <b>JENI</b>;</li>
-									</ul>
-									</p>
-									There are 3 kinds of journals: 2D images (<b>.jl</b>), 3D images (<b>.jls</b>) and 2D/3D time-lapses (<b>.jm</b>).
-									</p>
+								  <p>Image analysis workflows to identify objects are configured inside journals, human readable text files configuring input/output folders, the sequence of <b>LOBSTER</b> functions to apply to each input image and their associated parameters. Journals can be launched from <b>LOBSTER</b> Panel, or by typing <b>JENI</b> in the console. There are 3 kinds of journals: 2D images (<b>.jl</b>), 3D images (<b>.jls</b>) and 2D/3D time-lapses (<b>.jm</b>).
+								  </p>
 								  
-								  <p>2D journals are very flexible to handle multiple channels and perform image quality check prior to processing, which is often useful in the context of high content screening automated acquisition. 3D journals are designed to process large images, and offer multiple exploration and visualization options. Time-lapse journals are designed to process images by pair of consecutive time points. This is essentially reflected by a slightly different syntax and configuration options.</p>
+								  <p>2D journals are flexible to handle multiple channels and perform image quality check prior to processing (skip bad images), which is often useful for large scale automated acquisition. 3D journals are designed to process large images, and offer multiple exploration and visualization options. Time-lapse journals are designed to process images by pair of consecutive time points, mainly for object tracking. These specificities are reflected by a slightly different syntax and configuration options.</p>
 								  
-                                  <p>In the following section we focus on 2D journals, please refer to <a href="https://drive.google.com/file/d/1hn9RIoW2sG8nhYN_fLvrPlskLbM0sao7/view?usp=sharing" target="_blank"><b>LOBSTER</b> documentation</a>, section <b>Dissecting a 3D journal</b> and section <b>Dissecting a 2D/3D time-lapse journal</b> for information on other journal types. The <a href="https://drive.google.com/file/d/1U0YvgWZVeR7e1IyqOBcbvvYzEsseh67K/view?usp=sharing" target="_blank"> Cheat Sheet </a> is also a good help to quickly browse configuration options.</p>
+                                  <p>In the following section we focus on 2D journals, please refer to <a href="https://drive.google.com/file/d/1hn9RIoW2sG8nhYN_fLvrPlskLbM0sao7/view?usp=sharing" target="_blank"><b>LOBSTER</b> documentation</a>, section <b>Dissecting a 3D journal</b> and section <b>Dissecting a 2D/3D time-lapse journal</b> for complementary information.</p>
 								  
-                                  <p><b>LOBSTER</b> applies sequences of image processing functions (workflows) to identify objects in input images. <b>LOBSTER</b> functions are all stored in <b>LOBSTER</b> <b>/Code/_Functions</b> folder.
-                                  You do not need to know much about the internals of <b>LOBSTER</b> functions but it is important to understand that they are associated a set of parameters and that they transform one or several input images into one or several output images.</p>
+                                  <p>For every input image, <b>LOBSTER</b> applies a sequence of image processing functions (workflows) to identify objects. <b>LOBSTER</b> functions are stored in <b>LOBSTER</b> <b>/Code/_Functions</b> folder.
+                                  You do not need to know much about the internals of <b>LOBSTER</b> functions but it is important to understand that they have a standard interface with associated parameters, and that they transform one or several input images into one or several output images of same size.</p>
                                   
-								  <p>Let’s inspect the journal file <font color="magenta">'Tissue_SegWaterTiles.jl'</font> (from <b>LOBSTER</b> <b>/Journals</b> folder). This journal is demoed in <a href="https://drive.google.com/file/d/1N9KWKvS52NMGZH0WiYF8bwJLZsvLFx6J/view?usp=sharing" target="_blank">this video</a>.</p>
-				    			  <div class="section-block">
+								  <p>Let’s inspect the journal file <font color="magenta">'Tissue_SegWaterTiles.jl'</font>.</p>
+								  
+								  <p>
 				    			  <code>
 				    			  		InputFolder = './Images/Tissue/';<br />
 										OutputFolder = './Results/Images/Tissue/';<br />
@@ -103,7 +99,7 @@
 								<section id="2djournalsfunctions" class="doc-section">
 								<p><b>LOBSTER Functions</b></p>
                                 <div class="section-block">
-								<p><b>LOBSTER</b> functions are called in the order they appear; they are identified by the special character <b>@f</b>, for instance:
+								<p><b>LOBSTER</b> functions are called in the order they appear in a journal; they are identified by the special character <b>@f</b>, for instance:
 								<b>@fxg_mWaterTiles [iA] > [M]</b> calls the function <b>fxg_mWaterTiles</b> transforming input image <b>iA</b> into image <b>M</b>. Function arguments can be either input image variables (here <b>iA</b>) or temporary images (here <b>M</b>). Function parameters are configured in the structure <b>params</b> and the function declaration ends by <b>/endf</b>.</p>
 								</p>
 								<p>Right clicking on the function <b>fxg_mWaterTiles</b> in MATLAB script editor and selecting <b>Help on Selection</b> brings this window:</p>
@@ -111,7 +107,7 @@
 								      <img class="img-functiohelp" src="assets/images/functionhelp.png" alt="screenshot" width="800">
 				    			  </div>
 								</div>
-								<p>As can be read from the help, the input images are first Gaussian blured to mitigate noise (the strength of the filter is controled by the parameter <b>GRad</b>), and then objects are segmented into tiles, hopefully a single tile per object. The tile detection tolerance is controled by the parameter <b>ExtendedMinThr</b>.</p>
+								<p>The input images are first Gaussian blured to mitigate noise (the strength of the filter is set by the parameter <b>GRad</b>), and objects are segmented into tiles (hopefully a single tile per object). The tile detection tolerance is set by the parameter <b>ExtendedMinThr</b>.</p>
 								</section>
 
 								<section id="2djournalsviewexp" class="doc-section">
@@ -119,7 +115,7 @@
                                 <div class="section-block">
 								<p>To display every input image <b>iA</b> and overlay the resulting object mask <b>M:</b></p>
 								<p><b>/show iA > M</b></p>
-								<p>Exporting object mask <b>M</b> to output folder:</p>
+								<p>To exporting object mask <b>M</b> to output folder:</p>
 								<p><b>/keep M > tif</b></p>
 								</div>
                             	</section>
@@ -152,11 +148,11 @@
 									</code>
 								</div>
 								</section>
-								<p>Here, the first function aims at identifying bright regions in the image and the second attempts to merge these regions into concave bright particles.</p>
-								<p>The first function transforms input image <b>iA</b> (input folder) into image <b>L</b>.</p>
+								<p>Here, the first function is the same as before and the second attempts to merge these regions into concave bright particles.</p>
+								<p>The first function transforms input image <b>iA</b> (input image) into image <b>L</b>.</p>
 								<p>The second function tranforms image <b>L</b> and input image <b>iA</b> into image <b>L2</b>.</p>
-								<p>The input image filter configures than only TIFF files containing the text string <b>‘C00’</b> are processed; this is required to process a specific channel when several channels are mixed in input folder.</p>
-								<p>Finally, lines 3 and 4 set options to alter the display of the results. Some experiments are performed with these settings in <a href="https://drive.google.com/file/d/1JzfbG3V5YGOH6-a9uP9i28cjFIZB6wDn/view?usp=sharing" target="_blank">this video</a>. See <a href="https://drive.google.com/file/d/1U0YvgWZVeR7e1IyqOBcbvvYzEsseh67K/view?usp=sharing" target="_blank"> LOBSTER cheat sheet </a> for more information.</p>
+								<p>The input image filter configures than only <b>TIFF</b> files containing the text string <b>‘C00’</b> are processed; this is required to process a specific channel when images from several channels are mixed in the same folder.</p>
+								<p>Finally, lines 3 and 4 set options to alter the display of the results. The use of these settings is demonstrated in <a href="https://drive.google.com/file/d/1JzfbG3V5YGOH6-a9uP9i28cjFIZB6wDn/view?usp=sharing" target="_blank">this video</a>. See <a href="https://drive.google.com/file/d/1U0YvgWZVeR7e1IyqOBcbvvYzEsseh67K/view?usp=sharing" target="_blank"> LOBSTER cheat sheet </a> for more information.</p>
 
                             </section><!--//doc-section-->
                         </div><!--//content-inner-->
