@@ -137,13 +137,6 @@
 								  </p> 
 
 								  <p><u>Note</u>: In this particular case, since both journals point to the same input folder, the channel selection (DAPI/FISH) is performed inside the journals. To understand how, you can refer to <a href="journals.html" target="_blank">this page</a>, but this is not strictly necessary at this point.</p>
-								  
-								  <p><b>Detecting nuclei from 3D images</b></p>
-								  <p>Detecting nuclei from 3D images, exporting the markers to <b>LOBSTER CellInsight</b> and editing them.</p>
-								  <p>Load project <font color="magenta">'LymphGlandCellInsight.mat'</font>, click <b>Run All</b>. Open ImageJ and drag and drop the macro <b>CellInsight</b> (click <b>TOOLS</b> button to access tools folder).</p>
-								  <p><u>Note</u>: The first time you use <b>CellInsight</b>, it is required to copy the file <b>GetString.ijm</b> to ImageJ <b>/macros</b> folder.</p>
-								  <p>Drag and drop the input image to ImageJ (click <b>Show In</b> to browse input folder). Launch <b>CellInsight.ijm</b> from ImageJ macro editor, and press <b>Import</b> to load <b>LOBSTER</b> object markers. The object markers can be explored and edited (see <a href="https://drive.google.com/file/d/1Sy_wuPBjSklokqqrgzfDk4QRdLVWU5OU/view?usp=sharing" target="_blank"> CellInsight documentation</a>). Exit <b>CellInsight</b> by clicking <b>Exit</b>, not by closing the image in ImageJ.</p>
-								  <p><u>Note</u>: Large images not fitting in main memory can be opened in virtual stack mode (drag and drop the image to ImageJ bar >> until <b>Open as Virtual Stack</b> is displayed).</p>
 								  <br />
 								  
 								  <p><b>Exporting detected nuclei as an ImageJ interactive montage</b></p>
@@ -169,6 +162,15 @@
 								  <p>Upon conversion, open Mastodon from ImageJ. Click <b>New project</b> in <b>Mastodon</b> window and select the input image XML file (<b>export.xml</b>). Click <b>import mamut</b> and select <b>export_mamut.xml</b>. Click <b>bdv</b> and <b>trackscheme</b> access to the image and track viewers. It is possible to edit the tracks and perform other operations. Refer to <a href="https://github.com/mastodon-sc/mastodon" target="_blank">Mastodon</a> documentation for reference.</p>
 								  
 								  <p><u>Note</u>: If you want to try Mastodon with object divisions, export the time-lapse from the previous project as XML/HDF5 and perform the same operations.</p>
+								  <br />
+								  
+								  <p><b>Detecting nuclei from 3D images</b></p>
+								  <p>Detecting nuclei from 3D images, exporting the markers to <b>LOBSTER CellInsight</b> and editing them.</p>
+								  <p>Load project <font color="magenta">'LymphGlandCellInsight.mat'</font>, click <b>Run All</b>. Open ImageJ and drag and drop the macro <b>CellInsight</b> (click <b>TOOLS</b> button to access tools folder).</p>
+								  <p><u>Note</u>: The first time you use <b>CellInsight</b>, it is required to copy the file <b>GetString.ijm</b> to ImageJ <b>/macros</b> folder.</p>
+								  <p>Drag and drop the input image to ImageJ (click <b>Show In</b> to browse input folder). Launch <b>CellInsight.ijm</b> from ImageJ macro editor, and press <b>Import</b> to load <b>LOBSTER</b> object markers. The object markers can be explored and edited (see <a href="https://drive.google.com/file/d/1Sy_wuPBjSklokqqrgzfDk4QRdLVWU5OU/view?usp=sharing" target="_blank"> CellInsight documentation</a>). Exit <b>CellInsight</b> by clicking <b>Exit</b>, not by closing the image in ImageJ.</p>
+								  <p><u>Note</u>: Large images not fitting in main memory can be opened in virtual stack mode (drag and drop the image to ImageJ bar >> until <b>Open as Virtual Stack</b> is displayed).</p>
+								  <br />
 								  
 								  <p><b>Processing large 3D images</b></p>
 								  <p>To process large 3D images, bricking should be enabled by defining the variable <b>Brick</b> in the journal. For example, load the project <font color="magenta">'CellPilar_brcks.mat'</font> and inspect the journal (<b>Edit</b>): the variable <b>Brick</b> is set to 128 and the variable <b>GaurdBand</b> is set to 64. Both <b>JENI</b> and <b>IRMA</b> process the image by bricks of size 128 x 128, with an overlap of 64 pixels between bricks.</p>
@@ -228,10 +230,10 @@
 									<li>Look for a journal performing at least part of the analysis you plan</li>
 									<li>Run the journal to see the input images and get a feeling about the results</li>
 									<li>Make a copy of the journal and modify it to point to your input image folder (for large images, you probably first want to crop out some illustrative regions)</li>
-									<li>Make sure that your images have the same bit depth than the images of the journal, if not optionally convert them.</li>
+									<li>Make sure that your images have the same bit depth than the images of the journal, if not convert them or adapt the parameters of the journal if needed</li>
 									<li>Run the journal</li>
-									<li>You will probably need to tweak the parameters of some of the function used in the journal to obtain satisfying results. For this, open the journal and edit the parameters as was shown in previous sections. To get help on a function and its parameters, right click its name from MATLAB script editor and select <b>Help on Selection</b></li>
-									<li>Completing the project might finally require some customization, such as combining multiple journals and performing cross-measurements or exporting object models (such as illustrated in the previous section)</li>
+									<li>You will probably need to tweak the parameters of some of the functions to obtain satisfactory results.
+									<li>Completing the project might finally require some customization, such as combining multiple journals and performing cross-measurements or exporting object models (such as illustrated in the previous section).</li>
 									</ul>				
                                   </p> 
                             </div>
